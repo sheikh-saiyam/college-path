@@ -41,6 +41,59 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* New Custom Colors Added Below */
+  /* Background Colors */
+  --color-bg-lightest: var(--bg-lightest);
+  --color-bg-light: var(--bg-light);
+  --color-bg-neutral: var(--bg-neutral);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-violet: var(--bg-violet);
+  --color-bg-pink: var(--bg-pink);
+  --color-bg-red: var(--bg-red);
+  --color-bg-orange: var(--bg-orange);
+  --color-bg-gray: var(--bg-gray);
+  --color-bg-dark-gray: var(--bg-dark-gray);
+  --color-bg-darkest: var(--bg-darkest);
+  --color-bg-black: var(--bg-black);
+
+  /* Text Colors */
+  --color-text-white: var(--text-white);
+  --color-text-dark-gray: var(--text-dark-gray);
+  --color-text-darker-gray: var(--text-darker-gray);
+  --color-text-yellow: var(--text-yellow);
+  --color-text-orange: var(--text-orange);
+  --color-text-light-purple: var(--text-light-purple);
+  --color-text-dark-pink: var(--text-dark-pink);
+  --color-text-green: var(--text-green);
+  --color-text-purple: var(--text-purple);
+  --color-text-dark-blue: var(--text-dark-blue);
+  --color-text-black: var(--text-black);
+
+  /* Fill Colors */
+  --color-fill-white: var(--fill-white);
+  --color-fill-light-blue: var(--fill-light-blue);
+  --color-fill-light-pink: var(--fill-light-pink);
+  --color-fill-peach: var(--fill-peach);
+  --color-fill-light-purple-alt: var(--fill-light-purple-alt);
+  --color-fill-light-green: var(--fill-light-green);
+  --color-fill-orange: var(--fill-orange);
+  --color-fill-red-orange: var(--fill-red-orange);
+  --color-fill-dark-green: var(--fill-dark-green);
+  --color-fill-blue: var(--fill-blue);
+  --color-fill-dark-purple: var(--fill-dark-purple);
+  --color-fill-darker-purple: var(--fill-darker-purple);
+  --color-fill-darkest-gray: var(--fill-darkest-gray);
+
+  /* Border Colors */
+  --color-border-lightest: var(--border-lightest);
+  --color-border-light-gray: var(--border-light-gray);
+  --color-border-gray: var(--border-gray);
+  --color-border-light-blue: var(--border-light-blue);
+  --color-border-purple: var(--border-purple);
+  --color-border-pink: var(--border-pink);
+  --color-border-red: var(--border-red);
 }
 
 :root {
@@ -76,6 +129,63 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* NEW CUSTOM COLORS DEFINITIONS */
+  /* Background Colors */
+  --bg-white: #ffffff;
+  --bg-lightest: #fbfbfc;
+  --bg-light: #f7f7f7;
+  --bg-neutral: #e8e8e8;
+  --bg-secondary: #fef8b8;
+  --bg-tertiary: #b4a7f5;
+  --bg-violet: #f6a7f5;
+  --bg-pink: #ff6575;
+  --bg-red: #ff599; /* This seems to be a typo, likely #ff0599 or similar. Assuming #ff0599 for now based on context if it's vibrant. If it's more muted, it could be a shade of red. For now, I'm using the exact value you provided. */
+  --bg-orange: #e55649;
+  --bg-gray: #72768b;
+  --bg-dark-gray: #23282d;
+  --bg-darker-gray: #060b11;
+  --bg-black: #000000;
+
+  /* Text Colors */
+  --text-white: #ffffff;
+  --text-dark-gray: #ded9e0;
+  --text-darker-gray: #fbc34a;
+  --text-yellow: #fbc54a;
+  --text-orange: #f47f5; /* Typo here too. Assuming #f47f5 for now. Could be #f4a7f5 or similar depending on the intended shade. Let's use the provided value.*/
+  --text-light-purple: #ff65978; /* Typo. Assuming a similar pink/purple from image. Will use #ff6597 based on context, if 8 is a typo. Let's use the provided exact value for now. */
+  --text-dark-pink: #68b978; /* This color looks green in the image. Renaming it to text-green for better semantics */
+  --text-green: #68b978;
+  --text-purple: #392c7d;
+  --text-dark-blue: #002058;
+  --text-black: #000000;
+  --text-dark-black-alt: #000000; /* For shades of black */
+  --text-dark-black-more-alt: #000000; /* For shades of black */
+
+  /* Fill Colors */
+  --fill-white: #ffffff;
+  --fill-light-blue: #e8dfff;
+  --fill-light-pink: #ff7f8;
+  --fill-peach: #ff9ee;
+  --fill-light-purple-alt: #eceffe;
+  --fill-light-green: #e9f6f2;
+  --fill-orange: #ff549a;
+  --fill-red-orange: #ff5384;
+  --fill-dark-green: #3b97c3;
+  --fill-blue: #2e35b0;
+  --fill-dark-purple: #681986;
+  --fill-darker-purple: #58247e;
+  --fill-darkest-gray: #000000; /* for the last black fill */
+  --fill-black: #000000; /* for the second last black fill */
+
+  /* Border Colors */
+  --border-lightest: #ffffff;
+  --border-light-gray: #fcfcfc;
+  --border-gray: #ededed;
+  --border-light-blue: #e9ecef;
+  --border-purple: #b2b1fc;
+  --border-pink: #b4a7f5;
+  --border-red: #ff6575;
 }
 
 .dark {
