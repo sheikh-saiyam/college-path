@@ -1,15 +1,27 @@
 "use client";
 
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetTrigger,
-  SheetClose,
 } from "@/components/ui/sheet";
-import { Menu, X } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+
+import { useClerk, useUser } from "@clerk/nextjs";
+import { Loader, LogOut, Menu, User, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 interface NavLink {
@@ -26,8 +38,11 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { isSignedIn, user, isLoaded } = useUser();
+  const { signOut } = useClerk();
 
   const isActive = (href: string) => pathname === href;
+  const handleLogout = async () => await signOut();
 
   return (
     <nav className="sticky top-4 z-50 bg-bg-lightest border border-border-gray shadow-sm rounded-full max-w-[1536px] mx-auto px-6 py-3 md:py-2">
@@ -35,9 +50,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
-            <h1
-              className="text-3xl font-extrabold tracking-tight font-sans bg-gradient-to-r from-bg-violet to-bg-pink text-transparent bg-clip-text transition-all duration-300 hover:scale-105 transform origin-left"
-            >
+            <h1 className="text-3xl font-extrabold tracking-tight font-sans bg-gradient-to-r from-bg-violet to-bg-pink text-transparent bg-clip-text transition-all duration-300 hover:scale-105 transform origin-left">
               College Path
             </h1>
           </Link>
@@ -71,14 +84,86 @@ export default function Navbar() {
 
           {/* Auth Button & Mobile Menu Trigger */}
           <div className="flex items-center space-x-3">
-            <Link href={"/sign-in"}>
-              <Button
-                variant="default"
-                className="rounded-full bg-gradient-to-r from-bg-violet to-bg-pink text-text-white hover:from-bg-violet/90 hover:to-bg-pink/90 hover:scale-105 cursor-pointer transition-all duration-500 ease-in-out text-base px-6 hover:underline underline-offset-2"
-              >
-                Login
-              </Button>
-            </Link>
+            {!isLoaded || !isSignedIn ? (
+              <Link href={"/sign-in"}>
+                {/* Show a skeleton button if not loaded, otherwise the actual login button */}
+                {!isLoaded ? (
+                  <Loader className="h-8 w-8 rounded-full" />
+                ) : (
+                  <Button
+                    variant="default"
+                    className="rounded-full bg-gradient-to-r from-bg-violet to-bg-pink text-text-white
+                         hover:from-bg-violet/90 hover:to-bg-pink/90 hover:scale-105 cursor-pointer
+                         transition-all duration-500 ease-in-out text-base px-6
+                         hover:underline underline-offset-2"
+                  >
+                    Login
+                  </Button>
+                )}
+              </Link>
+            ) : (
+              // If user is signed in and loaded, show the Avatar dropdown
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  {/* Avatar as the trigger for the dropdown */}
+                  <Button
+                    variant="ghost" // Use ghost variant to make it look like just an avatar
+                    className="relative h-10 w-10 rounded-full p-0 focus-visible:ring-0 focus-visible:ring-offset-0 cursor-pointer" // Remove focus ring
+                  >
+                    <Avatar className="h-10 w-10 border-2 border-bg-violet hover:border-bg-pink transition-colors duration-300">
+                      {user?.imageUrl ? (
+                        <AvatarImage
+                          src={user.imageUrl}
+                          alt={
+                            user?.fullName || user?.username || "User Avatar"
+                          }
+                        />
+                      ) : (
+                        <AvatarFallback className="bg-gradient-to-r from-bg-violet to-bg-pink text-text-white">
+                          {user?.fullName
+                            ? user.fullName.charAt(0).toUpperCase()
+                            : user?.username
+                            ? user.username.charAt(0).toUpperCase()
+                            : "U"}
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  {/* Display User Email */}
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">
+                        {user?.fullName || user?.username || "User"}{" "}
+                      </p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {user?.emailAddresses?.[0]?.emailAddress || "No Email"}{" "}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {/* Go to Profile Link with Lucide Icon */}
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/profile"
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
+                      <User className="h-4 w-4" />
+                      Go to Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  {/* Logout Button with Lucide Icon */}
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 cursor-pointer text-red-600 hover:text-red-700 focus:text-red-700"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
 
             {/* Mobile Menu Trigger */}
             <Sheet>
