@@ -36,6 +36,5 @@ export const siteMetadata: Metadata = {
     locale: "en_US",
   },
   metadataBase: new URL("https://college-path.vercel.app"),
-  // themeColor: "#3E4EB8",
   icons: { icon: "/favicon.ico" },
 };
