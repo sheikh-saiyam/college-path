@@ -3,6 +3,7 @@ import Navbar from "@/components/shared/Navbar";
 import { siteMetadata } from "@/constants/metadata";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,6 +29,15 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <NextTopLoader
+            color="linear-gradient(to right, var(--bg-violet), var(--bg-pink))"
+            height={2.5}
+            crawlSpeed={200}
+            showSpinner={false}
+            easing="ease"
+            speed={300}
+          />
+
           <Navbar />
           {children}
           <Footer />

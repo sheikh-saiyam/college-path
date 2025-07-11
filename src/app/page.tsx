@@ -6,62 +6,6 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="min-h-screen bg-bg-white font-inter">
-      {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-bg-lightest border-b border-border-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold">
-                <span className="text-bg-violet">College</span>{" "}
-                <span className="text-bg-pink">Path</span>
-              </h1>
-            </div>
-
-            {/* Navigation Links */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a
-                href="#"
-                className="text-text-black hover:text-bg-violet transition-colors"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="text-text-black hover:text-bg-violet transition-colors"
-              >
-                Colleges
-              </a>
-              <a
-                href="#"
-                className="text-text-black hover:text-bg-violet transition-colors"
-              >
-                Admission
-              </a>
-              <a
-                href="#"
-                className="text-text-black hover:text-bg-violet transition-colors"
-              >
-                My College
-              </a>
-            </div>
-
-            {/* Auth Buttons */}
-            <div className="flex items-center space-x-4">
-              <Button
-                variant="outline"
-                className="rounded-lg border-border-gray text-text-black hover:bg-bg-light bg-transparent"
-              >
-                Login
-              </Button>
-              <Button className="bg-bg-violet hover:bg-bg-pink text-text-white rounded-lg">
-                Register
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="bg-bg-light py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
