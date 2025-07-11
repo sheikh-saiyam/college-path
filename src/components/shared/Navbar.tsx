@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { useClerk, useUser } from "@clerk/nextjs";
-import { Loader, LogOut, Menu, User, X } from "lucide-react";
+import { Loader, LogOut, Menu, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -45,8 +45,8 @@ export default function Navbar() {
   const handleLogout = async () => await signOut();
 
   return (
-    <div className="bg-white sticky top-0 pt-4 z-50">
-      <nav className="bg-bg-lightest border-t shadow rounded-full max-w-[1536px] mx-auto px-6 py-3 md:py-2">
+    <div className="bg-white sticky top-0 pt-4 px-6 z-50">
+      <nav className="bg-bg-lightest border-t shadow rounded-full max-w-[1396px] mx-auto py-3 md:py-2 px-6">
         <div className="flex justify-between items-center h-12">
           {/* Logo */}
           <div className="flex items-center">
@@ -89,7 +89,7 @@ export default function Navbar() {
                 <Link href={"/sign-in"}>
                   {/* Show a skeleton button if not loaded, otherwise the actual login button */}
                   {!isLoaded ? (
-                    <Loader className="h-8 w-8 rounded-full" />
+                    <Loader className="h-8 w-8 rounded-full text-bg-pink" />
                   ) : (
                     <Button
                       variant="default"
@@ -181,29 +181,9 @@ export default function Navbar() {
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="w-[300px] bg-bg-lightest border-l border-border-gray animate-in slide-in-from-right duration-300"
+                  className="w-[300px] bg-bg-lightest border-l border-border-gray animate-in slide-in-from-right duration-300 pt-6"
                 >
-                  <div className="flex flex-col space-y-6 pt-6">
-                    {/* Sheet Header */}
-                    <div className="flex justify-between items-center">
-                      <Link href="/">
-                        <h1 className="text-2xl font-bold tracking-tight font-sans">
-                          <span className="text-bg-violet">College</span>
-                          <span className="text-bg-pink">Path</span>
-                        </h1>
-                      </Link>
-                      <SheetClose asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="rounded-full hover:bg-bg-light"
-                        >
-                          <X className="h-5 w-5 text-text-black" />
-                          <span className="sr-only">Close</span>
-                        </Button>
-                      </SheetClose>
-                    </div>
-
+                  <div className="flex flex-col space-y-6 p-6">
                     {/* Mobile Navigation Links */}
                     <div className="flex flex-col space-y-2">
                       {navLinks.map((link) => (
@@ -222,16 +202,6 @@ export default function Navbar() {
                         </SheetClose>
                       ))}
                     </div>
-
-                    {/* Mobile Login Button */}
-                    <SheetClose asChild>
-                      <Button
-                        variant="default"
-                        className="rounded-full bg-gradient-to-r from-bg-violet to-bg-pink text-text-white hover:from-bg-pink hover:to-bg-violet transition-all duration-300"
-                      >
-                        Login
-                      </Button>
-                    </SheetClose>
                   </div>
                 </SheetContent>
               </Sheet>
