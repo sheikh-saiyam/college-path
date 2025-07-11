@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const bentoImages = [
   {
-    src: "https://via.placeholder.com/400x300?text=Grad+1",
+    src: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JhZHVhdGVzfGVufDB8fDB8fHww",
     alt: "Graduates Group 1",
     className: "col-span-2 row-span-1",
   },
@@ -27,7 +27,7 @@ const bentoImages = [
     alt: "Graduates Group 5",
   },
   {
-    src: "https://via.placeholder.com/400x300?text=Grad+6",
+    src: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JhZHVhdGVzfGVufDB8fDB8fHww",
     alt: "Graduates Group 6",
     className: "col-span-2 row-span-1",
   },
