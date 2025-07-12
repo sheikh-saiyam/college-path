@@ -1,85 +1,111 @@
-"use client";
-
+import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
-const bentoImages = [
-  {
-    src: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JhZHVhdGVzfGVufDB8fDB8fHww",
-    alt: "Graduates Group 1",
-    className: "col-span-2 row-span-1",
-  },
-  {
-    src: "https://via.placeholder.com/200x400?text=Grad+2",
-    alt: "Graduates Group 2",
-    className: "col-span-1 row-span-2",
-  },
-  {
-    src: "https://via.placeholder.com/400x200?text=Grad+3",
-    alt: "Graduates Group 3",
-    className: "col-span-2 row-span-1",
-  },
-  {
-    src: "https://via.placeholder.com/200x200?text=Grad+4",
-    alt: "Graduates Group 4",
-  },
-  {
-    src: "https://via.placeholder.com/200x200?text=Grad+5",
-    alt: "Graduates Group 5",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JhZHVhdGVzfGVufDB8fDB8fHww",
-    alt: "Graduates Group 6",
-    className: "col-span-2 row-span-1",
-  },
+const galleryImages = [
+  "https://placeholder.com/400x300?text=Graduation+Ceremony+2024",
+  "https://placeholder.com/300x400?text=Campus+Life",
+  "https://placeholder.com/500x300?text=Research+Lab",
+  "https://placeholder.com/300x300?text=Sports+Day",
+  "https://placeholder.com/400x400?text=Cultural+Festival",
+  "https://placeholder.com/350x250?text=Library+Study",
+  "https://placeholder.com/450x350?text=Science+Fair",
+  "https://placeholder.com/300x350?text=Art+Exhibition",
 ];
-
-const marqueeImages = [...bentoImages, ...bentoImages, ...bentoImages];
 
 export default function CollegeImageGallery() {
   return (
-    <section className="py-12 bg-bg-lightest">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Title */}
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10">
-          Our <span className="text-[#f6a7f5]">College</span>{" "}
-          <span className="text-[#ff6575]">Graduates</span>
-        </h2>
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="py-20 px-4 bg-gradient-to-r from-[#fbfbfc] to-[#f7f7f7]"
+    >
+      <div className="container mx-auto">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <Badge className="mb-4 bg-[#e9f6f2] text-[#68b978] border-[#68b978]">
+              Campus Life
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
+              College Memories Gallery
+            </h2>
+            <p className="text-xl text-[#72768b] max-w-2xl mx-auto">
+              Explore vibrant campus life through our collection of graduation
+              ceremonies, events, and student activities.
+            </p>
+          </motion.div>
+        </div>
 
-        {/* ✅ Bento Layout */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[150px] gap-4 mb-12">
-          {bentoImages.map((img, i) => (
-            <div
-              key={i}
-              className={`relative overflow-hidden rounded-lg border border-gray-200 shadow-md ${
-                img.className ?? ""
-              }`}
+        {/* Marquee Gallery */}
+        <div className="overflow-hidden mb-8">
+          <motion.div
+            animate={{ x: [-1000, 0] }}
+            transition={{
+              duration: 20,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+            className="flex gap-6"
+          >
+            {[...galleryImages, ...galleryImages].map((image, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className="flex-shrink-0 w-80 h-60 rounded-2xl overflow-hidden shadow-lg"
+              >
+                <Image
+                  src={image || "/placeholder.svg"}
+                  alt={`Gallery image ${index + 1}`}
+                  width={320}
+                  height={240}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Bento Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 h-96"
+        >
+          {galleryImages.slice(0, 8).map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05, zIndex: 10 }}
+              className={`
+                  relative rounded-2xl overflow-hidden shadow-lg cursor-pointer
+                  ${index === 0 ? "col-span-2 row-span-2" : ""}
+                  ${index === 2 ? "col-span-2" : ""}
+                  ${index === 4 ? "row-span-2" : ""}
+                `}
             >
               <Image
-                src={img.src}
-                alt={img.alt}
+                src={image || "/placeholder.svg"}
+                alt={`Gallery ${index + 1}`}
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-300"
+                className="object-cover hover:scale-110 transition-transform duration-500"
               />
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.div>
           ))}
-        </div>
-
-        {/* ✅ Pure CSS Marquee */}
-        <div className="overflow-hidden whitespace-nowrap border-t border-b border-gray-200 py-4 bg-white">
-          <div className="animate-marquee flex gap-4 w-max">
-            {marqueeImages.map((img, i) => (
-              <div key={i} className="relative w-[180px] h-[135px] shrink-0">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="rounded-md border border-gray-200 object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
