@@ -1,12 +1,12 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BookOpen, Calendar, Star, Trophy } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { colleges } from "@/lib/colleges";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export default function FeaturedColleges({ showAll }: { showAll: boolean }) {
   return (
@@ -51,20 +51,27 @@ export default function FeaturedColleges({ showAll }: { showAll: boolean }) {
             >
               <Card className="overflow-hidden h-full border-2 border-[#e8e8e8] hover:border-bg-violet transition-all duration-300 hover:shadow-md pt-0">
                 <div className="relative h-64 overflow-hidden">
-                  <Image
-                    src={college.image || "/placeholder.svg"}
-                    alt={college.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute top-4 right-4">
+                  <Avatar className="w-full h-full rounded-none">
+                    <AvatarImage
+                      src={college.image || "/placeholder.svg"}
+                      alt={college.name}
+                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <AvatarFallback className="text-white bg-gray-400 w-full h-full flex items-center justify-center">
+                      {college.name.slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
+
+                  <div className="absolute top-4 right-4 z-20">
                     <Badge className="bg-[#fbc54a] text-[#002058] font-semibold">
                       <Star className="w-3 h-3 mr-1 fill-current" />
                       {college.rating}
                     </Badge>
                   </div>
-                  <div className="absolute bottom-2 left-4 right-4">
+
+                  <div className="absolute bottom-2 left-4 right-4 z-20">
                     <h3 className="text-2xl font-bold text-white mb-2">
                       {college.name}
                     </h3>

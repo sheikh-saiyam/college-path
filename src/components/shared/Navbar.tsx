@@ -68,8 +68,9 @@ export default function Navbar() {
                     "font-medium transition-all text-lg duration-300 relative group",
                     "text-text-black/75",
                     "opacity-85 duration-300",
-                    isActive(link.href) ?
-                      "text-transparent bg-clip-text bg-gradient-to-r from-bg-violet font-bold to-bg-pink" : "mt-[3px]"
+                    isActive(link.href)
+                      ? "text-transparent bg-clip-text bg-gradient-to-r from-bg-violet font-bold to-bg-pink"
+                      : "mt-[3px]"
                   )}
                 >
                   {link.label}

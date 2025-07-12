@@ -1,8 +1,8 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const galleryImages = [
   "https://www.swansea.ac.uk/graduation/952-graduation-summer-2016-throw-hats-wide.jpg",
@@ -89,14 +89,17 @@ export default function CollegeImageGallery() {
                         : ""
                     }`}
                   >
-                    <Image
-                      src={img}
-                      alt={`Gallery ${idx + 1}`}
-                      width={1000}
-                      height={500}
-                      quality={100} // Make image super clear
-                      className="w-full h-full object-cover rounded-xl"
-                    />
+                    <Avatar className="w-full h-full rounded-xl">
+                      <AvatarImage
+                        src={img}
+                        alt={`Gallery ${idx + 1}`}
+                        className="w-full h-full object-cover rounded-xl"
+                        loading="lazy"
+                      />
+                      <AvatarFallback className="w-full h-full flex items-center justify-center bg-gray-200 text-sm text-gray-500 rounded-xl">
+                        Gallery
+                      </AvatarFallback>
+                    </Avatar>
 
                     <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                   </div>
