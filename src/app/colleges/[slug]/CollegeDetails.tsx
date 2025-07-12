@@ -123,7 +123,7 @@ export default function CollegeDetailsClient({
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-pink-50 to-slate-50">
       {/* Navigation */}
       <motion.nav
-        className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-violet-100 shadow-sm"
+        className="sticky top-20 z-50 bg-white/90 backdrop-blur-xl border-b border-violet-100 shadow-sm"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
