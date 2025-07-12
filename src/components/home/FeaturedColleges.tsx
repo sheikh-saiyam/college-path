@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { colleges } from "@/lib/colleges";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function FeaturedColleges({ showAll }: { showAll: boolean }) {
   return (
@@ -137,9 +138,15 @@ export default function FeaturedColleges({ showAll }: { showAll: boolean }) {
                     </div>
                   </div>
 
-                  <Button className="w-full bg-gradient-to-r from-bg-violet to-bg-pink hover:from-bg-violet/90 hover:to-bg-pink/80 hover:scale-105 duration-300 cursor-pointer text-white font-medium">
-                    View Details
-                  </Button>
+                  <Link
+                    href={`/colleges/${college.name
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                  >
+                    <Button className="w-full bg-gradient-to-r from-bg-violet to-bg-pink hover:from-bg-violet/90 hover:to-bg-pink/80 hover:scale-105 duration-300 cursor-pointer text-white font-medium">
+                      View Details
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </motion.div>

@@ -31,7 +31,7 @@ export default function NotFound() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="text-4xl font-bold text-[var(--text-dark-blue)] mb-4"
+          className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-bg-violet to-bg-pink bg-clip-text text-transparent leading-tight"
         >
           Lost in the Path?
         </motion.h1>
