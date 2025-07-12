@@ -45,8 +45,8 @@ export default function Navbar() {
   const handleLogout = async () => await signOut();
 
   return (
-    <div className="bg-white sticky top-0 pt-4 px-6 z-50">
-      <nav className="bg-bg-lightest border-t shadow rounded-full max-w-[1396px] mx-auto py-3 md:py-2 px-6">
+    <div className="bg-white sticky top-0 py-2 px-6 z-50">
+      <nav className="bg-bg-light border-t shadow rounded-full max-w-[1396px] mx-auto py-3 md:py-2 px-6">
         <div className="flex justify-between items-center h-12">
           {/* Logo */}
           <div className="flex items-center">

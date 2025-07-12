@@ -1,23 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import Hero from "@/components/home/Hero";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { colleges } from "@/lib/colleges";
 import { motion } from "framer-motion";
 import {
-  Search,
-  Star,
-  Calendar,
   BookOpen,
-  Trophy,
-  ExternalLink,
+  Calendar,
   ChevronLeft,
   ChevronRight,
+  ExternalLink,
+  Star,
+  Trophy,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { colleges } from "@/lib/colleges";
+import { useState } from "react";
 
 // Research papers data
 const researchPapers = [
@@ -128,20 +127,7 @@ const galleryImages = [
 ];
 
 export default function HomePage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<typeof colleges>([]);
-  const [showResults, setShowResults] = useState(false);
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
-
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
-      const results = colleges.filter((college) =>
-        college.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setSearchResults(results);
-      setShowResults(true);
-    }
-  };
 
   const nextReview = () => {
     setCurrentReviewIndex((prev) => (prev + 1) % reviews.length);
@@ -156,146 +142,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#fbfbfc] to-[#f7f7f7]">
       {/* Hero Search Section */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative py-20 px-4 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] opacity-10"></div>
-        <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <Badge className="mb-6 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] text-white border-0 px-6 py-2 text-sm font-medium">
-              🎓 Discover Your Dream College
-            </Badge>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] bg-clip-text text-transparent leading-tight"
-          >
-            Find Your Perfect College
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-xl text-[#72768b] mb-8 max-w-2xl mx-auto leading-relaxed"
-          >
-            Explore top colleges worldwide, discover research opportunities, and
-            find your academic home with our comprehensive college search
-            platform.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-6"
-          >
-            <Input
-              type="text"
-              placeholder="Search for colleges..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 h-12 px-6 text-lg border-2 border-[#e8e8e8] focus:border-[#b4a7f5] rounded-full"
-              onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-            />
-            <Button
-              onClick={handleSearch}
-              className="h-12 px-8 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white rounded-full font-medium"
-            >
-              <Search className="w-5 h-5 mr-2" />
-              Search
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="flex flex-wrap justify-center gap-4 text-sm text-[#72768b]"
-          >
-            <span className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#68b978] rounded-full"></div>
-              98% Student Satisfaction
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#fbc54a] rounded-full"></div>
-              24/7 Support Available
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#ff6575] rounded-full"></div>
-              100+ Colleges
-            </span>
-          </motion.div>
-
-          {/* Search Results */}
-          {showResults && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-            >
-              {searchResults.map((college, index) => (
-                <motion.div
-                  key={college.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                >
-                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-[#e8e8e8] hover:border-[#b4a7f5]">
-                    <div className="relative h-48">
-                      <Image
-                        src={college.image || "/placeholder.svg"}
-                        alt={college.name}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-[#fbc54a] text-[#002058]">
-                          <Star className="w-3 h-3 mr-1" />
-                          {college.rating}
-                        </Badge>
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-[#002058] mb-2">
-                        {college.name}
-                      </h3>
-                      <p className="text-[#72768b] text-sm mb-4">
-                        {college.details.description.slice(0, 100)}...
-                      </p>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-center gap-2 text-[#68b978]">
-                          <Calendar className="w-4 h-4" />
-                          {college.admissionDates}
-                        </div>
-                        <div className="flex items-center gap-2 text-[#392c7d]">
-                          <BookOpen className="w-4 h-4" />
-                          {college.researchCount} Research Papers
-                        </div>
-                      </div>
-                      <Button className="w-full mt-4 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white">
-                        View Details
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </div>
-      </motion.section>
-
+      <Hero />
+      
       {/* Featured Colleges Section */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -312,7 +160,7 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Badge className="mb-4 bg-[#e8dfff] text-[#392c7d] border-[#b4a7f5]">
+              <Badge className="mb-4 bg-[#e8dfff] text-[#392c7d] border-bg-bg-violet">
                 Featured Institutions
               </Badge>
               <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
@@ -336,7 +184,7 @@ export default function HomePage() {
                 whileHover={{ y: -10 }}
                 className="group"
               >
-                <Card className="overflow-hidden h-full border-2 border-[#e8e8e8] hover:border-[#b4a7f5] transition-all duration-300 hover:shadow-2xl">
+                <Card className="overflow-hidden h-full border-2 border-[#e8e8e8] hover:border-bg-bg-violet transition-all duration-300 hover:shadow-2xl">
                   <div className="relative h-64 overflow-hidden">
                     <Image
                       src={college.image || "/placeholder.svg"}
@@ -404,7 +252,7 @@ export default function HomePage() {
                             <Badge
                               key={idx}
                               variant="outline"
-                              className="text-xs border-[#b4a7f5] text-[#392c7d]"
+                              className="text-xs border-bg-bg-violet text-[#392c7d]"
                             >
                               <Trophy className="w-3 h-3 mr-1" />
                               {sport}
@@ -414,7 +262,7 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <Button className="w-full bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white font-medium">
+                    <Button className="w-full bg-gradient-to-r from-bg-violet to-bg-pink hover:from-[#a396f0] hover:to-[#f596f0] text-white font-medium">
                       View Details
                     </Button>
                   </CardContent>
@@ -535,7 +383,7 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Badge className="mb-4 bg-[#eceffe] text-[#392c7d] border-[#b4a7f5]">
+              <Badge className="mb-4 bg-[#eceffe] text-[#392c7d] border-bg-bg-violet">
                 Academic Research
               </Badge>
               <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
@@ -558,7 +406,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
               >
-                <Card className="h-full border-2 border-[#e8e8e8] hover:border-[#b4a7f5] transition-all duration-300 hover:shadow-xl">
+                <Card className="h-full border-2 border-[#e8e8e8] hover:border-bg-bg-violet transition-all duration-300 hover:shadow-xl">
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
@@ -578,7 +426,7 @@ export default function HomePage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="border-[#b4a7f5] text-[#392c7d] hover:bg-[#b4a7f5] hover:text-white bg-transparent"
+                        className="border-bg-bg-violet text-[#392c7d] hover:bg-bg-bg-violet hover:text-white bg-transparent"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </Button>
@@ -597,7 +445,7 @@ export default function HomePage() {
                       </div>
                       <Button
                         size="sm"
-                        className="bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white"
+                        className="bg-gradient-to-r from-bg-violet to-bg-pink hover:from-[#a396f0] hover:to-[#f596f0] text-white"
                       >
                         Read Paper
                       </Button>
@@ -658,7 +506,7 @@ export default function HomePage() {
                       alt={reviews[currentReviewIndex].name}
                       width={80}
                       height={80}
-                      className="rounded-full border-4 border-[#b4a7f5]"
+                      className="rounded-full border-4 border-bg-bg-violet"
                     />
                   </div>
 
@@ -666,11 +514,10 @@ export default function HomePage() {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-5 h-5 ${
-                          i < reviews[currentReviewIndex].rating
-                            ? "text-[#fbc54a] fill-current"
-                            : "text-[#e8e8e8]"
-                        }`}
+                        className={`w-5 h-5 ${i < reviews[currentReviewIndex].rating
+                          ? "text-[#fbc54a] fill-current"
+                          : "text-[#e8e8e8]"
+                          }`}
                       />
                     ))}
                   </div>
@@ -700,7 +547,7 @@ export default function HomePage() {
                 onClick={prevReview}
                 variant="outline"
                 size="sm"
-                className="border-[#b4a7f5] text-[#392c7d] hover:bg-[#b4a7f5] hover:text-white bg-transparent"
+                className="border-bg-bg-violet text-[#392c7d] hover:bg-bg-bg-violet hover:text-white bg-transparent"
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
@@ -708,7 +555,7 @@ export default function HomePage() {
                 onClick={nextReview}
                 variant="outline"
                 size="sm"
-                className="border-[#b4a7f5] text-[#392c7d] hover:bg-[#b4a7f5] hover:text-white bg-transparent"
+                className="border-bg-bg-violet text-[#392c7d] hover:bg-bg-bg-violet hover:text-white bg-transparent"
               >
                 <ChevronRight className="w-4 h-4" />
               </Button>
@@ -720,11 +567,10 @@ export default function HomePage() {
                 <button
                   key={index}
                   onClick={() => setCurrentReviewIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentReviewIndex
-                      ? "bg-[#b4a7f5] scale-125"
-                      : "bg-[#e8e8e8] hover:bg-[#b4a7f5]/50"
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentReviewIndex
+                    ? "bg-bg-bg-violet scale-125"
+                    : "bg-[#e8e8e8] hover:bg-bg-bg-violet/50"
+                    }`}
                 />
               ))}
             </div>
