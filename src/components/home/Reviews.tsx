@@ -15,9 +15,9 @@ const reviews = [
     college: "Harvard University",
     rating: 5,
     comment:
-      "Exceptional academic environment with world-class faculty. The research opportunities are unparalleled.",
+      "Harvard gave me top-class education and great research opportunities. Campus life was truly remarkable.",
     year: "Class of 2023",
-    avatar: "https://placeholder.com/100x100?text=AT",
+    avatar: "https://randomuser.me/api/portraits/men/45.jpg",
   },
   {
     id: 2,
@@ -25,9 +25,9 @@ const reviews = [
     college: "Stanford University",
     rating: 5,
     comment:
-      "Amazing campus culture and innovative programs. The tech ecosystem here is incredible.",
+      "Stanford's innovative learning style and modern labs helped me grow both academically and personally.",
     year: "Class of 2024",
-    avatar: "https://placeholder.com/100x100?text=PS",
+    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
   },
   {
     id: 3,
@@ -35,9 +35,9 @@ const reviews = [
     college: "Dhaka College",
     rating: 4,
     comment:
-      "Great local institution with strong community ties. Excellent value for education.",
+      "Dhaka College offers strong academic support and a close-knit community that helps students succeed.",
     year: "Class of 2022",
-    avatar: "https://placeholder.com/100x100?text=MH",
+    avatar: "https://randomuser.me/api/portraits/men/33.jpg",
   },
   {
     id: 4,
@@ -45,9 +45,29 @@ const reviews = [
     college: "Oxford University",
     rating: 5,
     comment:
-      "Rich history and tradition combined with cutting-edge research. Truly transformative experience.",
+      "Oxford's historic campus and rigorous academics made it the most fulfilling experience of my student life.",
     year: "Class of 2023",
-    avatar: "https://placeholder.com/100x100?text=EJ",
+    avatar: "https://randomuser.me/api/portraits/women/12.jpg",
+  },
+  {
+    id: 5,
+    name: "Lucas Müller",
+    college: "Stanford University",
+    rating: 5,
+    comment:
+      "Stanford empowered me to explore ideas freely, collaborate with experts, and build a global mindset.",
+    year: "Class of 2023",
+    avatar: "https://randomuser.me/api/portraits/men/59.jpg",
+  },
+  {
+    id: 6,
+    name: "Amina Rahman",
+    college: "Oxford University",
+    rating: 5,
+    comment:
+      "Oxford helped sharpen my critical thinking and gave me access to unmatched academic resources and support.",
+    year: "Class of 2024",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
   },
 ];
 
@@ -73,6 +93,7 @@ export default function Reviews() {
       className="py-20 px-4 bg-gradient-to-br from-[#fbfbfc] to-[#f7f7f7]"
     >
       <div className="container mx-auto">
+        {/* Header */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -80,7 +101,7 @@ export default function Reviews() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Badge className="mb-4 bg-[#fef8b8] text-[#002058] border-[#fbc54a]">
+            <Badge className="mb-2 text-base bg-[#eceffe] text-text-purple border-bg-bg-violet">
               Student Testimonials
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
@@ -102,7 +123,7 @@ export default function Reviews() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <Card className="border-2 border-[#e8e8e8] shadow-xl bg-white/80 backdrop-blur-sm">
+            <Card className="border-2 border-bg-violet/50 shadow-xl bg-white/80 backdrop-blur-sm">
               <CardContent className="p-8 md:p-12">
                 <div className="flex justify-center mb-6">
                   <Image
@@ -122,7 +143,7 @@ export default function Reviews() {
                       key={i}
                       className={`w-5 h-5 ${
                         i < reviews[currentReviewIndex].rating
-                          ? "text-[#fbc54a] fill-current"
+                          ? "text-text-yellow fill-current"
                           : "text-[#e8e8e8]"
                       }`}
                     />
@@ -154,7 +175,7 @@ export default function Reviews() {
               onClick={prevReview}
               variant="outline"
               size="sm"
-              className="border-bg-bg-violet text-[#392c7d] hover:bg-bg-bg-violet hover:text-white bg-transparent"
+              className="border-bg-bg-violet cursor-pointer text-[#392c7d] not-last-of-type:bg-transparent"
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
@@ -162,22 +183,22 @@ export default function Reviews() {
               onClick={nextReview}
               variant="outline"
               size="sm"
-              className="border-bg-bg-violet text-[#392c7d] hover:bg-bg-bg-violet hover:text-white bg-transparent"
+              className="border-bg-bg-violet cursor-pointer text-[#392c7d] not-last-of-type:bg-transparent"
             >
               <ChevronRight className="w-4 h-4" />
             </Button>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-2 mt-4">
             {reviews.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentReviewIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentReviewIndex
-                    ? "bg-bg-bg-violet scale-125"
-                    : "bg-[#e8e8e8] hover:bg-bg-bg-violet/50"
+                    ? "bg-bg-violet scale-125"
+                    : "bg-[#e8e8e8] hover:bg-bg-violet"
                 }`}
               />
             ))}

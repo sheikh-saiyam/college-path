@@ -46,7 +46,7 @@ export default function Navbar() {
 
   return (
     <div className="bg-white sticky top-0 py-2 px-6 z-50">
-      <nav className="bg-bg-light border-t shadow rounded-full max-w-[1396px] mx-auto py-3 md:py-2 px-6">
+      <nav className="bg-gradient-to-r from-bg-violet/10 to-bg-pink/10 border-t shadow rounded-full max-w-[1396px] mx-auto py-3 md:py-2 px-6">
         <div className="flex justify-between items-center h-12">
           {/* Logo */}
           <div className="flex items-center">
@@ -66,10 +66,10 @@ export default function Navbar() {
                   href={link.href}
                   className={cn(
                     "font-medium transition-all text-lg duration-300 relative group",
-                    "text-text-black/85",
+                    "text-text-black/75",
                     "opacity-85 duration-300",
-                    isActive(link.href) &&
-                      "text-transparent bg-clip-text bg-gradient-to-r from-bg-violet font-bold to-bg-pink"
+                    isActive(link.href) ?
+                      "text-transparent bg-clip-text bg-gradient-to-r from-bg-violet font-bold to-bg-pink" : "mt-[3px]"
                   )}
                 >
                   {link.label}

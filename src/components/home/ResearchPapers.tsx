@@ -3,8 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import { BookOpen } from "lucide-react";
 
 const researchPapers = [
   {
@@ -15,7 +15,7 @@ const researchPapers = [
     year: "2024",
     category: "Technology",
     abstract:
-      "This paper explores the integration of AI technologies in educational frameworks and their impact on learning outcomes.",
+      "This paper examines how AI is integrated into modern education, focusing on its role in enhancing teaching, boosting engagement, & improving learning outcomes.",
     link: "https://example.com/research1",
     downloads: 1250,
   },
@@ -27,7 +27,7 @@ const researchPapers = [
     year: "2024",
     category: "Environment",
     abstract:
-      "A comprehensive study on renewable energy implementation in metropolitan areas.",
+      "A study of renewable energy integration in urban areas, highlighting solar, wind, and smart grid technology to support sustainable urban infrastructure.",
     link: "https://example.com/research2",
     downloads: 980,
   },
@@ -39,7 +39,7 @@ const researchPapers = [
     year: "2023",
     category: "Climate Science",
     abstract:
-      "Research on effective adaptation strategies for climate change mitigation in developing countries.",
+      "An in-depth analysis of global climate adaptation policies, focusing on risk assessment, planning models, and strategies in developing nations.",
     link: "https://example.com/research3",
     downloads: 1450,
   },
@@ -51,7 +51,7 @@ const researchPapers = [
     year: "2024",
     category: "Healthcare",
     abstract:
-      "Exploring the potential of quantum computing in medical diagnosis and treatment optimization.",
+      "This paper explores quantum algorithms in diagnostics, drug discovery, and optimization, showing how computing power can transform healthcare systems.",
     link: "https://example.com/research4",
     downloads: 750,
   },
@@ -66,18 +66,19 @@ export default function ResearchPapers() {
       viewport={{ once: true }}
       className="py-20 px-4"
     >
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
+      <div className="max-w-[1396px] px-6 mx-auto">
+        {/* Header */}
+        <div className="text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Badge className="mb-4 bg-[#eceffe] text-[#392c7d] border-bg-bg-violet">
+            <Badge className="mb-2 text-base bg-[#eceffe] text-text-purple border-bg-bg-violet">
               Academic Research
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-text-dark-blue mb-4">
               Latest Research Papers
             </h2>
             <p className="text-xl text-[#72768b] max-w-2xl mx-auto">
@@ -87,7 +88,7 @@ export default function ResearchPapers() {
           </motion.div>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           {researchPapers.map((paper, index) => (
             <motion.div
               key={paper.id}
@@ -97,46 +98,46 @@ export default function ResearchPapers() {
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              <Card className="h-full border-2 border-[#e8e8e8] hover:border-bg-bg-violet transition-all duration-300 hover:shadow-xl">
+              <Card className="h-full border-2 border-[#e8e8e8] hover:border-bg-violet transition-all duration-300 hover:shadow-md grid place-items-streach">
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <Badge className="mb-3 bg-[#e8dfff] text-[#392c7d]">
+                      <Badge className="mb-3 bg-[#e8dfff] text-text-purple">
                         {paper.category}
                       </Badge>
-                      <CardTitle className="text-xl font-bold text-[#002058] leading-tight mb-2">
+                      <CardTitle className="text-xl font-bold text-text-dark-blue leading-tight mb-2">
                         {paper.title}
                       </CardTitle>
                       <p className="text-sm text-[#72768b] mb-2">
                         {paper.authors}
                       </p>
-                      <p className="text-sm font-medium text-[#68b978]">
+                      <p className="text-sm font-medium text-[#68b978] mb-2">
                         {paper.college} • {paper.year}
                       </p>
+                      <div className="flex items-center gap-4 text-sm text-[#72768b]">
+                        <span className="flex items-center gap-1">
+                          <BookOpen className="w-4 h-4" />
+                          {paper.downloads} downloads
+                        </span>
+                      </div>
                     </div>
-                    <Button
+                    {/* <Button
                       size="sm"
                       variant="outline"
-                      className="border-bg-bg-violet text-[#392c7d] hover:bg-bg-bg-violet hover:text-white bg-transparent"
+                      className="border-bg-bg-violet text-text-purple hover:bg-bg-bg-violet hover:text-white bg-transparent"
                     >
                       <ExternalLink className="w-4 h-4" />
-                    </Button>
+                    </Button> */}
                   </div>
                 </CardHeader>
-                <CardContent className="pt-0">
+                <CardContent className="-mt-6 pt-0">
                   <p className="text-[#72768b] mb-4 leading-relaxed">
                     {paper.abstract}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-sm text-[#72768b]">
-                      <span className="flex items-center gap-1">
-                        <BookOpen className="w-4 h-4" />
-                        {paper.downloads} downloads
-                      </span>
-                    </div>
+                  <div className="flex items-end justify-end">
                     <Button
                       size="sm"
-                      className="bg-gradient-to-r from-bg-violet to-bg-pink hover:from-[#a396f0] hover:to-[#f596f0] text-white"
+                      className="bg-gradient-to-r from-bg-violet to-bg-pink hover:from-bg-violet/90 hover:to-bg-pink/90 cursor-pointer text-white"
                     >
                       Read Paper
                     </Button>

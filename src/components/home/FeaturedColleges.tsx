@@ -71,7 +71,7 @@ export default function FeaturedColleges() {
                   </div>
                 </div>
 
-                <CardContent className="p-6 space-y-4">
+                <CardContent className="px-6 space-y-4">
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center gap-2 text-[#68b978]">
                       <Calendar className="w-4 h-4" />
@@ -139,3 +139,5 @@ export default function FeaturedColleges() {
     </motion.section>
   );
 }
+
+
