@@ -8,7 +8,7 @@ import { colleges } from "@/lib/colleges";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function FeaturedColleges() {
+export default function FeaturedColleges({ showAll }: { showAll: boolean }) {
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -26,10 +26,10 @@ export default function FeaturedColleges() {
             viewport={{ once: true }}
           >
             <Badge className="mb-2 text-base bg-[#eceffe] text-text-purple border-bg-bg-violet">
-              Featured Institutions
+              {!showAll && "Featured"} Institutions
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
-              Top Colleges & Universities
+              {!showAll ? "Top" : ""} Colleges & Universities
             </h2>
             <p className="text-xl text-[#72768b] max-w-2xl mx-auto">
               Discover exceptional educational institutions known for their
@@ -39,7 +39,7 @@ export default function FeaturedColleges() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {colleges.slice(0, 3).map((college, index) => (
+          {(showAll ? colleges : colleges.slice(0, 3)).map((college, index) => (
             <motion.div
               key={college.id}
               initial={{ opacity: 0, y: 30 }}

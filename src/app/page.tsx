@@ -11,7 +11,7 @@ export default function HomePage() {
       <Hero />
 
       {/* Featured Colleges Section */}
-      <FeaturedColleges />
+      <FeaturedColleges showAll={false} />
 
       {/* Image Gallery Section */}
       <CollegeImageGallery />

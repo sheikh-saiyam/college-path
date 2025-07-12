@@ -45,7 +45,7 @@ export default function Navbar() {
   const handleLogout = async () => await signOut();
 
   return (
-    <div className="bg-white sticky top-0 py-2 px-6 z-50">
+    <div className="bg-white sticky top-0 py-3 px-6 z-50">
       <nav className="bg-gradient-to-r from-bg-violet/10 to-bg-pink/10 border-t shadow rounded-full max-w-[1396px] mx-auto py-3 md:py-2 px-6">
         <div className="flex justify-between items-center h-12">
           {/* Logo */}

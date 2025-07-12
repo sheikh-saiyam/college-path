@@ -2,7 +2,8 @@ export const colleges = [
   {
     id: 1,
     name: "Dhaka College",
-    image: "https://sgp1.digitaloceanspaces.com/dc2/news/V2ZEG7RhxYQtSpEDqqyN4oCBhrdFOu4T3pvjqncq.jpg",
+    image:
+      "https://sgp1.digitaloceanspaces.com/dc2/news/V2ZEG7RhxYQtSpEDqqyN4oCBhrdFOu4T3pvjqncq.jpg",
     rating: 4.5,
     admissionDates: "June 15 - July 30, 2025",
     researchCount: 120,
@@ -37,7 +38,8 @@ export const colleges = [
   {
     id: 2,
     name: "Notre Dame College",
-    image: "https://ndc.edu.bd/storage/app/uploads/public/63d/b57/b62/thumb_689_1662_710_0_0_crop.jpg",
+    image:
+      "https://ndc.edu.bd/storage/app/uploads/public/63d/b57/b62/thumb_689_1662_710_0_0_crop.jpg",
     rating: 4.7,
     admissionDates: "June 10 - July 25, 2025",
     researchCount: 95,
@@ -66,7 +68,8 @@ export const colleges = [
   {
     id: 3,
     name: "Rajshahi College",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Administrative_Building_of_Rajshahi_College_02.jpg/1200px-Administrative_Building_of_Rajshahi_College_02.jpg",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Administrative_Building_of_Rajshahi_College_02.jpg/1200px-Administrative_Building_of_Rajshahi_College_02.jpg",
     rating: 4.3,
     admissionDates: "June 20 - August 5, 2025",
     researchCount: 80,
@@ -91,7 +94,8 @@ export const colleges = [
   {
     id: 4,
     name: "Harvard University",
-    image: "https://placeholder.com/300x200?text=Harvard+University",
+    image:
+      "https://image-static.collegedunia.com/public/college_data/images/studyabroad/appImage/college_1090_29-15:00_o-HARVARD-UNIVERSITY-BUILDING-facebook.jpeg",
     rating: 4.9,
     admissionDates: "December 1 - January 15, 2025",
     researchCount: 500,
@@ -125,7 +129,8 @@ export const colleges = [
   {
     id: 5,
     name: "Stanford University",
-    image: "https://placeholder.com/300x200?text=Stanford+University",
+    image:
+      "https://img2.storyblok.com/fit-in/1200x630/f/64062/1181x709/0a5a1e360a/stanford-br.png",
     rating: 4.8,
     admissionDates: "December 5 - January 20, 2025",
     researchCount: 450,
@@ -155,7 +160,8 @@ export const colleges = [
   {
     id: 6,
     name: "Oxford University",
-    image: "https://placeholder.com/300x200?text=Oxford+University",
+    image:
+      "https://cdn.britannica.com/03/117103-050-F4C2FC83/view-University-of-Oxford-England-Oxfordshire.jpg",
     rating: 4.9,
     admissionDates: "October 15 - November 30, 2025",
     researchCount: 400,
