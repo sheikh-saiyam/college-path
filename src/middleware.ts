@@ -1,6 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isPrivateRoute = createRouteMatcher(["/my-college", "/profile"]);
+const isPrivateRoute = createRouteMatcher([
+  "/my-college",
+  "/profile",
+  "/admission",
+  "/colleges(.*)",
+]);
 const isPrivateApiRoute = createRouteMatcher(["/api/my-college"]);
 
 export default clerkMiddleware(async (auth, req) => {

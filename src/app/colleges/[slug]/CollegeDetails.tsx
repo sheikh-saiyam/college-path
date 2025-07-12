@@ -1,5 +1,13 @@
 "use client";
 
+import {
+  GiBasketballBall,
+  GiCricketBat,
+  GiRugbyConversion,
+  GiSoccerBall,
+  GiTennisRacket,
+} from "react-icons/gi";
+import { MdRowing } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import {
@@ -15,17 +23,9 @@ import {
   Trophy,
   Users,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { FaSwimmer, FaTableTennis } from "react-icons/fa";
-import {
-  GiBasketballBall,
-  GiCricketBat,
-  GiRugbyConversion,
-  GiSoccerBall,
-  GiTennisRacket,
-} from "react-icons/gi";
-import { MdRowing } from "react-icons/md";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export interface College {
   id: number;
@@ -97,25 +97,27 @@ export default function CollegeDetailsClient({
           >
             {/* Hero Section */}
             <motion.div variants={fadeInUp} className="text-center">
-              <div className="relative inline-block group">
+              <div className="relative inline-block group w-full">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
+                  className="relative inline-block group"
                 >
-                  <Image
-                    src={college.image || "/placeholder.svg"}
-                    alt={`${college.name} campus view`}
-                    width={800}
-                    height={400}
-                    className="w-full max-w-4xl h-64 sm:h-80 lg:h-96 object-cover rounded-3xl shadow-xl border-4 border-gray-100"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-3xl" />
+                  <Avatar className="w-full md:min-w-3xl max-w-7xl h-64 sm:h-80 lg:h-96 rounded-3xl shadow-xl border-4 border-gray-100 overflow-hidden">
+                    <AvatarImage
+                      src={college.image || "/placeholder.svg"}
+                      alt={`${college.name} campus view`}
+                      className="object-cover w-full h-full"
+                    />
+                    <AvatarFallback>{college.name.slice(0, 2)}</AvatarFallback>
+                  </Avatar>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-3xl z-10" />
                 </motion.div>
               </div>
 
               <motion.h1
-                className="-mt-2 text-4xl sm:text-5xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-bg-violet to-bg-pink leading-tight drop-shadow-sm"
+                className="text-4xl sm:text-5xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-bg-violet to-bg-pink leading-tight drop-shadow-sm"
                 variants={sectionVariants}
                 style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
               >
