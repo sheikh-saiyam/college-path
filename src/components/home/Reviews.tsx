@@ -4,8 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import Image from "next/image";
 
 const reviews = [
@@ -84,6 +84,15 @@ export default function Reviews() {
     );
   };
 
+  // Auto change slide every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextReview();
+    }, 3000); //3 seconds
+
+    return () => clearInterval(interval);
+  }, [reviews.length]);
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -94,7 +103,7 @@ export default function Reviews() {
     >
       <div className="container mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
