@@ -3,10 +3,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const reviews = [
   {
@@ -84,11 +84,11 @@ export default function Reviews() {
     );
   };
 
-  // Auto change slide every 3 seconds
+  // Auto change slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       nextReview();
-    }, 3000); //3 seconds
+    }, 5000); // 5 seconds
 
     return () => clearInterval(interval);
   }, [reviews.length]);
@@ -135,15 +135,21 @@ export default function Reviews() {
             <Card className="border-2 border-bg-violet/50 shadow-xl bg-white/80 backdrop-blur-sm">
               <CardContent className="p-8 md:p-12">
                 <div className="flex justify-center mb-6">
-                  <Image
-                    src={
-                      reviews[currentReviewIndex].avatar || "/placeholder.svg"
-                    }
-                    alt={reviews[currentReviewIndex].name}
-                    width={80}
-                    height={80}
-                    className="rounded-full border-4 border-bg-bg-violet"
-                  />
+                  <Avatar className="w-20 h-20 border-4 border-bg-bg-violet">
+                    <AvatarImage
+                      src={
+                        reviews[currentReviewIndex].avatar || "/placeholder.svg"
+                      }
+                      alt={reviews[currentReviewIndex].name}
+                    />
+                    <AvatarFallback>
+                      {reviews[currentReviewIndex].name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
                 </div>
 
                 <div className="flex justify-center mb-4">
