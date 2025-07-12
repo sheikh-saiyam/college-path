@@ -26,7 +26,7 @@ export const siteMetadata: Metadata = {
     siteName: "College Path",
     images: [
       {
-        url: "/banner.jpg",
+        url: "/banner.png",
         width: 1200,
         height: 630,
         alt: "College Path - Book your dream college",
