@@ -17,15 +17,15 @@ export default function FeaturedColleges() {
       viewport={{ once: true }}
       className="py-20 px-4"
     >
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
+      <div className="max-w-7xl px-6 mx-auto">
+        <div className="text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Badge className="mb-4 bg-[#e8dfff] text-[#392c7d] border-bg-bg-violet">
+            <Badge className="mb-2 text-base bg-[#eceffe] text-text-purple border-bg-bg-violet">
               Featured Institutions
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
@@ -49,7 +49,7 @@ export default function FeaturedColleges() {
               whileHover={{ y: -10 }}
               className="group"
             >
-              <Card className="overflow-hidden h-full border-2 border-[#e8e8e8] hover:border-bg-bg-violet transition-all duration-300 hover:shadow-2xl">
+              <Card className="overflow-hidden h-full border-2 border-[#e8e8e8] hover:border-bg-violet transition-all duration-300 hover:shadow-md pt-0">
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={college.image || "/placeholder.svg"}
@@ -64,7 +64,7 @@ export default function FeaturedColleges() {
                       {college.rating}
                     </Badge>
                   </div>
-                  <div className="absolute bottom-4 left-4 right-4">
+                  <div className="absolute bottom-2 left-4 right-4">
                     <h3 className="text-2xl font-bold text-white mb-2">
                       {college.name}
                     </h3>
@@ -72,21 +72,24 @@ export default function FeaturedColleges() {
                 </div>
 
                 <CardContent className="px-6 space-y-4">
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="flex items-center gap-2 text-[#68b978]">
-                      <Calendar className="w-4 h-4" />
-                      <span className="font-medium">Admission</span>
+                  <div className="flex flex-col gap-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 text-[#68b978]">
+                        <Calendar className="w-4 h-4" />
+                        <span className="font-medium">Admission:</span>
+                      </div>
+                      <div className="text-[#72768b]">
+                        {college.admissionDates}
+                      </div>
                     </div>
-                    <div className="text-[#72768b]">
-                      {college.admissionDates}
-                    </div>
-
-                    <div className="flex items-center gap-2 text-[#392c7d]">
-                      <BookOpen className="w-4 h-4" />
-                      <span className="font-medium">Research</span>
-                    </div>
-                    <div className="text-[#72768b]">
-                      {college.researchCount} Papers
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 text-[#392c7d]">
+                        <BookOpen className="w-4 h-4" />
+                        <span className="font-medium">Research:</span>
+                      </div>
+                      <div className="text-[#72768b]">
+                        {college.researchCount} Papers
+                      </div>
                     </div>
                   </div>
 
@@ -117,7 +120,7 @@ export default function FeaturedColleges() {
                           <Badge
                             key={idx}
                             variant="outline"
-                            className="text-xs border-bg-bg-violet text-[#392c7d]"
+                            className="text-xs bg-[#eceffe] text-text-purple border-bg-bg-violet"
                           >
                             <Trophy className="w-3 h-3 mr-1" />
                             {sport}
@@ -127,7 +130,7 @@ export default function FeaturedColleges() {
                     </div>
                   </div>
 
-                  <Button className="w-full bg-gradient-to-r from-bg-violet to-bg-pink hover:from-[#a396f0] hover:to-[#f596f0] text-white font-medium">
+                  <Button className="w-full bg-gradient-to-r from-bg-violet to-bg-pink hover:from-bg-violet/90 hover:to-bg-pink/80 hover:scale-105 duration-300 cursor-pointer text-white font-medium">
                     View Details
                   </Button>
                 </CardContent>

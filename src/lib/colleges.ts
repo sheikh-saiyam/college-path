@@ -2,7 +2,7 @@ export const colleges = [
   {
     id: 1,
     name: "Dhaka College",
-    image: "https://placeholder.com/300x200?text=Dhaka+College",
+    image: "https://sgp1.digitaloceanspaces.com/dc2/news/V2ZEG7RhxYQtSpEDqqyN4oCBhrdFOu4T3pvjqncq.jpg",
     rating: 4.5,
     admissionDates: "June 15 - July 30, 2025",
     researchCount: 120,
@@ -37,7 +37,7 @@ export const colleges = [
   {
     id: 2,
     name: "Notre Dame College",
-    image: "https://placeholder.com/300x200?text=Notre+Dame+College",
+    image: "https://ndc.edu.bd/storage/app/uploads/public/63d/b57/b62/thumb_689_1662_710_0_0_crop.jpg",
     rating: 4.7,
     admissionDates: "June 10 - July 25, 2025",
     researchCount: 95,
@@ -66,7 +66,7 @@ export const colleges = [
   {
     id: 3,
     name: "Rajshahi College",
-    image: "https://placeholder.com/300x200?text=Rajshahi+College",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Administrative_Building_of_Rajshahi_College_02.jpg/1200px-Administrative_Building_of_Rajshahi_College_02.jpg",
     rating: 4.3,
     admissionDates: "June 20 - August 5, 2025",
     researchCount: 80,
