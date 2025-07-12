@@ -1,16 +1,31 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import {
   BookOpen,
-  Calendar,
+  CalendarDays,
+  ClipboardList,
+  Dumbbell,
   ExternalLink,
-  GraduationCap,
+  FileText,
+  FlaskConical,
+  Sparkles,
   Star,
   Trophy,
   Users,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { FaSwimmer, FaTableTennis } from "react-icons/fa";
+import {
+  GiBasketballBall,
+  GiCricketBat,
+  GiRugbyConversion,
+  GiSoccerBall,
+  GiTennisRacket,
+} from "react-icons/gi";
+import { MdRowing } from "react-icons/md";
 
 export interface College {
   id: number;
@@ -70,15 +85,15 @@ export default function CollegeDetailsClient({
   college,
 }: CollegeDetailsClientProps) {
   return (
-    <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen p-4">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Main Content */}
         <div>
           <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="space-y-8"
+            className="space-y-10"
           >
             {/* Hero Section */}
             <motion.div variants={fadeInUp} className="text-center">
@@ -92,112 +107,87 @@ export default function CollegeDetailsClient({
                     alt={`${college.name} campus view`}
                     width={800}
                     height={400}
-                    className="w-full max-w-4xl h-64 sm:h-80 lg:h-96 object-cover rounded-3xl shadow-2xl"
+                    className="w-full max-w-4xl h-64 sm:h-80 lg:h-96 object-cover rounded-3xl shadow-xl border-4 border-gray-100"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-3xl" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-3xl" />
                 </motion.div>
               </div>
 
               <motion.h1
-                className="mt-8 text-4xl sm:text-5xl lg:text-7xl font-black bg-gradient-to-r from-violet-600 via-pink-600 to-violet-800 bg-clip-text text-transparent leading-tight"
+                className="-mt-2 text-4xl sm:text-5xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-bg-violet to-bg-pink leading-tight drop-shadow-sm"
                 variants={sectionVariants}
                 style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
               >
                 {college.name}
               </motion.h1>
 
-              <motion.div
-                className="mt-6 flex flex-wrap justify-center gap-6 text-sm"
-                variants={sectionVariants}
-              >
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-md">
-                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                  <span className="font-semibold text-gray-700">
-                    {college.rating} Rating
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-md">
-                  <GraduationCap className="w-4 h-4 text-violet-600" />
-                  <span className="font-semibold text-gray-700">
-                    {college.researchCount} Research Projects
-                  </span>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Overview Section */}
-            <motion.section
-              id="overview"
-              variants={sectionVariants}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-violet-100 p-8 sm:p-10"
-              {...cardHover}
-            >
-              <motion.h2
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 flex items-center gap-4"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="p-3 bg-gradient-to-r from-violet-500 to-pink-500 rounded-2xl">
-                  <BookOpen className="w-6 h-6 text-white" />
-                </div>
-                Overview
-              </motion.h2>
               <motion.p
-                className="text-gray-700 text-lg leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
+                className="text-gray-600 text-xl md:text-2xl font-medium leading-relaxed max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.2 }}
               >
                 {college.details.description}
               </motion.p>
-            </motion.section>
+
+              <motion.div
+                className="mt-2 flex flex-wrap justify-center gap-4 text-base"
+                variants={sectionVariants}
+              >
+                <div className="flex items-center gap-2 bg-text-yellow rounded-full px-5 py-2 shadow-md text-white font-medium">
+                  <Star className="w-5 h-5 text0white fill-current" />
+                  <span>{college.rating} Rating</span>
+                </div>
+                <div className="flex items-center gap-2 bg-bg-violet/50 rounded-full px-5 py-2 shadow-md text-gray-700 font-medium">
+                  <BookOpen className="w-5 h-5 text-violet-600" />
+                  <span>{college.researchCount} Research Projects</span>
+                </div>
+              </motion.div>
+            </motion.div>
 
             {/* Admission Section */}
             <motion.section
               id="admission"
               variants={sectionVariants}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-violet-100 p-8 sm:p-10"
+              className="bg-gradient-to-r from-bg-violet/20 to-bg-pink/20 rounded-3xl shadow-lg border border-gray-100 p-6 text-center"
               {...cardHover}
             >
-              <motion.h2
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 flex items-center gap-4"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="p-3 bg-gradient-to-r from-violet-500 to-pink-500 rounded-2xl">
-                  <Calendar className="w-6 h-6 text-white" />
-                </div>
-                Admission Process
-              </motion.h2>
-              <div className="space-y-6">
+              <div className="space-y-3">
                 <motion.div
-                  className="bg-gradient-to-r from-violet-50 to-pink-50 rounded-2xl p-6 border border-violet-200"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-gray-50 rounded-2xl p-6 border-l-4 border-violet-500 shadow-sm text-left"
                 >
-                  <h3 className="font-bold text-violet-900 mb-3 text-lg">
-                    📅 Admission Dates
+                  <h3 className="font-semibold text-text-purple text-xl flex items-center gap-2">
+                    <CalendarDays className="w-6 h-6 text-violet-500" />{" "}
+                    Admission Dates:{" "}
+                    <p className="text-text-purple/90 font-medium text-lg">
+                      {college.admissionDates}
+                    </p>
                   </h3>
-                  <p className="text-violet-800 font-semibold text-lg">
-                    {college.admissionDates}
-                  </p>
                 </motion.div>
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-gray-50 rounded-2xl p-6 border-l-4 border-pink-400 shadow-sm text-left"
                 >
-                  <h3 className="font-bold text-gray-900 mb-4 text-lg">
-                    📋 Application Process
+                  <h3 className="font-semibold text-text-purple text-xl flex items-center  gap-2">
+                    <ClipboardList className="w-6 h-6 text-pink-500" />{" "}
+                    Application Process:{" "}
+                    <p className="text-text-purple/90 font-medium text-lg">
+                      {college.details.admissionProcess}
+                    </p>
                   </h3>
-                  <p className="text-gray-700 leading-relaxed text-lg">
-                    {college.details.admissionProcess}
-                  </p>
                 </motion.div>
+
+                <Link href={"/admission"}>
+                  <Button className="w-3/5 bg-gradient-to-r from-bg-violet to-bg-pink hover:opacity-80 text-base hover:scale-105 duration-300 cursor-pointer text-white font-medium">
+                    Get Admission
+                  </Button>
+                </Link>
               </div>
             </motion.section>
 
@@ -205,41 +195,47 @@ export default function CollegeDetailsClient({
             <motion.section
               id="events"
               variants={sectionVariants}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-violet-100 p-8 sm:p-10"
+              className="bg-gradient-to-r from-bg-violet/20 to-bg-pink/20 rounded-3xl shadow-lg border border-gray-100 p-6 text-center"
               {...cardHover}
             >
               <motion.h2
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 flex items-center gap-4"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
+                className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-bg-violet to-bg-pink mb-1 flex items-center justify-center gap-4"
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
               >
-                <div className="p-3 bg-gradient-to-r from-violet-500 to-pink-500 rounded-2xl">
-                  <Users className="w-6 h-6 text-white" />
+                <div className="p-3 bg-gradient-to-r from-bg-violet to-bg-pink rounded-xl shadow-md">
+                  <Users className="w-4 h-4 text-white" />
                 </div>
                 Events & Activities
-              </motion.h2>
-              <div className="space-y-6">
-                <motion.p
-                  className="text-gray-700 leading-relaxed text-lg"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  {college.details.eventsDetails}
-                </motion.p>
+              </motion.h2>{" "}
+              <motion.p
+                className="text-gray-700 leading-relaxed mb-4 text-lg max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                {college.details.eventsDetails}
+              </motion.p>
+              <div>
                 <div className="grid gap-4">
                   {college.events.map((event, index) => (
                     <motion.div
                       key={index}
-                      className="bg-gradient-to-r from-pink-50 to-violet-50 rounded-2xl p-6 border-l-4 border-pink-400 shadow-md"
-                      initial={{ opacity: 0, x: -20 }}
+                      className={`bg-gray-50 rounded-2xl p-6 border-l-4 ${
+                        index === 0 ? "border-violet-500" : "border-pink-500"
+                      } shadow-sm text-left`}
+                      initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 + 0.4 }}
-                      whileHover={{ scale: 1.02, x: 4 }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                      whileHover={{ x: 5 }}
                     >
-                      <p className="text-pink-800 font-semibold text-lg flex items-center gap-3">
-                        <span className="text-2xl">🎉</span>
+                      <p className="text-text-purple font-medium text-lg flex items-center gap-3">
+                        <Sparkles
+                          className={`w-6 h-6 ${
+                            index === 0 ? "text-violet-500" : "text-pink-500"
+                          }`}
+                        />
                         {event}
                       </p>
                     </motion.div>
@@ -252,26 +248,26 @@ export default function CollegeDetailsClient({
             <motion.section
               id="research"
               variants={sectionVariants}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-violet-100 p-8 sm:p-10"
+              className="bg-gradient-to-r from-bg-violet/20 to-bg-pink/20 rounded-3xl shadow-lg border border-gray-100 p-6 text-center"
               {...cardHover}
             >
               <motion.h2
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 flex items-center gap-4"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
+                className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-bg-violet to-bg-pink mb-1 flex items-center justify-center gap-4"
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
               >
-                <div className="p-3 bg-gradient-to-r from-violet-500 to-pink-500 rounded-2xl">
-                  <GraduationCap className="w-6 h-6 text-white" />
+                <div className="p-3 bg-gradient-to-r from-bg-violet to-bg-pink rounded-xl shadow-md">
+                  <FlaskConical className="w-4 h-4 text-white" />
                 </div>
                 Research Works
               </motion.h2>
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <motion.p
-                  className="text-gray-700 leading-relaxed text-lg"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="text-gray-700 leading-relaxed text-lg max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.2 }}
                 >
                   {college.details.researchWorks}
                 </motion.p>
@@ -282,18 +278,18 @@ export default function CollegeDetailsClient({
                       href={research.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-gradient-to-r from-violet-50 to-pink-50 rounded-2xl p-6 border border-violet-200 hover:border-violet-300 transition-all group shadow-md"
-                      initial={{ opacity: 0, y: 20 }}
+                      className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-violet-200 transition-all group shadow-sm text-left"
+                      initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 + 0.4 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                      whileHover={{ y: -2 }}
                     >
                       <div className="flex items-center justify-between">
-                        <p className="text-violet-800 font-semibold group-hover:text-violet-900 text-lg flex items-center gap-3">
-                          <span className="text-2xl">🔬</span>
+                        <p className="text-gray-800 font-medium group-hover:text-violet-700 text-lg flex items-center gap-3">
+                          <FileText className="w-6 h-6 text-violet-500" />
                           {research.title}
                         </p>
-                        <ExternalLink className="w-5 h-5 text-violet-600 group-hover:text-violet-700 group-hover:scale-110 transition-all" />
+                        <ExternalLink className="w-5 h-5 text-gray-500 group-hover:text-violet-600 transition-all" />
                       </div>
                     </motion.a>
                   ))}
@@ -305,45 +301,79 @@ export default function CollegeDetailsClient({
             <motion.section
               id="sports"
               variants={sectionVariants}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-violet-100 p-8 sm:p-10"
+              className="bg-gradient-to-r from-bg-violet/20 to-bg-pink/20 rounded-3xl shadow-lg border border-gray-100 p-6 text-center"
               {...cardHover}
             >
               <motion.h2
-                className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 flex items-center gap-4"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
+                className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-bg-violet to-bg-pink mb-1 flex items-center justify-center gap-4"
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
               >
-                <div className="p-3 bg-gradient-to-r from-violet-500 to-pink-500 rounded-2xl">
+                <div className="p-3 bg-gradient-to-r from-bg-violet to-bg-pink rounded-xl shadow-md">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
                 Sports & Recreation
               </motion.h2>
               <div className="space-y-6">
                 <motion.p
-                  className="text-gray-700 leading-relaxed text-lg"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="text-gray-700 leading-relaxed text-lg max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.2 }}
                 >
                   {college.details.sportsCategories}
                 </motion.p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {college.sports.map((sport, index) => (
-                    <motion.div
-                      key={index}
-                      className="bg-gradient-to-br from-violet-100 via-pink-100 to-violet-100 rounded-2xl p-6 text-center shadow-lg border border-violet-200"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 + 0.4 }}
-                      whileHover={{ scale: 1.05, rotate: 1 }}
-                    >
-                      <Trophy className="w-8 h-8 text-violet-600 mx-auto mb-3" />
-                      <p className="text-violet-800 font-bold text-lg">
-                        {sport}
-                      </p>
-                    </motion.div>
-                  ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {college.sports.map((sport, index) => {
+                    let SportIcon;
+
+                    switch (sport.toLowerCase()) {
+                      case "cricket":
+                        SportIcon = GiCricketBat;
+                        break;
+                      case "football":
+                      case "soccer":
+                        SportIcon = GiSoccerBall;
+                        break;
+                      case "badminton":
+                        SportIcon = FaTableTennis;
+                        break;
+                      case "basketball":
+                        SportIcon = GiBasketballBall;
+                        break;
+                      case "tennis":
+                        SportIcon = GiTennisRacket;
+                        break;
+                      case "swimming":
+                        SportIcon = FaSwimmer;
+                        break;
+                      case "rugby":
+                        SportIcon = GiRugbyConversion;
+                        break;
+                      case "rowing":
+                        SportIcon = MdRowing;
+                        break;
+                      default:
+                        SportIcon = Dumbbell;
+                    }
+
+                    return (
+                      <motion.div
+                        key={index}
+                        className="bg-gray-50 rounded-2xl p-6 text-center shadow-sm border border-gray-200 flex items-center gap-3 justify-center"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.1 + 0.3 }}
+                        whileHover={{ scale: 1.03 }}
+                      >
+                        <SportIcon className="w-8 h-8 text-violet-600" />
+                        <p className="text-text-purple font-bold text-lg">
+                          {sport}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
             </motion.section>
