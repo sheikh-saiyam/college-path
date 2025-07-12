@@ -8,11 +8,12 @@ function slugify(name: string) {
 }
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+
   const college = colleges.find((c) => slugify(c.name) === slug);
 
   if (!college) {
@@ -48,6 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CollegeDetailsPage({ params }: Props) {
   const { slug } = await params;
+
   const college = colleges.find((c) => slugify(c.name) === slug);
 
   if (!college) return <NotFound />;
