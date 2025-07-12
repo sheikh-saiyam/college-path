@@ -9,6 +9,7 @@ import { BookOpen, Calendar, GraduationCap, Search, Star } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { colleges } from "@/lib/colleges";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 export default function Hero() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -105,7 +106,7 @@ export default function Hero() {
                   {searchResults.map((college) => (
                     <Card
                       key={college.id}
-                      className="overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-[#e8e8e8] hover:border-bg-bg-violet max-w-md pt-0 mx-auto"
+                      className="overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-[#e8e8e8] hover:border-bg-bg-violet max-w-md pt-0 mx-auto grid place-items-stretch"
                     >
                       <div className="relative h-48 flex justify-center items-center bg-gray-100">
                         <Avatar className="w-full h-full rounded-none">
@@ -140,9 +141,15 @@ export default function Hero() {
                             {college.researchCount} Research Papers
                           </div>
                         </div>
-                        <Button className="w-full mt-4 bg-gradient-to-r from-bg-violet to-bg-pink hover:from-[#a396f0] hover:to-[#f596f0] text-white">
-                          View Details
-                        </Button>
+                        <Link
+                          href={`/colleges/${college.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                        >
+                          <Button className="mt-3 w-full bg-gradient-to-r from-bg-violet to-bg-pink hover:opacity-80 hover:scale-105 duration-300 cursor-pointer text-white font-medium">
+                            View Details
+                          </Button>
+                        </Link>
                       </CardContent>
                     </Card>
                   ))}
