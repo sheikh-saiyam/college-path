@@ -1,304 +1,736 @@
-import CollegeImageGallery from "@/components/home/ImageGallery";
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Search,
+  Star,
+  Calendar,
+  BookOpen,
+  Trophy,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Star } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { colleges } from "@/lib/colleges";
 
-export default function Home() {
+// Research papers data
+const researchPapers = [
+  {
+    id: 1,
+    title: "Artificial Intelligence in Modern Education Systems",
+    authors: "Dr. Sarah Johnson, Prof. Michael Chen",
+    college: "Harvard University",
+    year: "2024",
+    category: "Technology",
+    abstract:
+      "This paper explores the integration of AI technologies in educational frameworks and their impact on learning outcomes.",
+    link: "https://example.com/research1",
+    downloads: 1250,
+  },
+  {
+    id: 2,
+    title: "Sustainable Energy Solutions for Urban Development",
+    authors: "Dr. Ahmed Rahman, Dr. Lisa Wang",
+    college: "Stanford University",
+    year: "2024",
+    category: "Environment",
+    abstract:
+      "A comprehensive study on renewable energy implementation in metropolitan areas.",
+    link: "https://example.com/research2",
+    downloads: 980,
+  },
+  {
+    id: 3,
+    title: "Climate Change Adaptation Strategies",
+    authors: "Prof. Emily Davis, Dr. Robert Kim",
+    college: "Oxford University",
+    year: "2023",
+    category: "Climate Science",
+    abstract:
+      "Research on effective adaptation strategies for climate change mitigation in developing countries.",
+    link: "https://example.com/research3",
+    downloads: 1450,
+  },
+  {
+    id: 4,
+    title: "Quantum Computing Applications in Healthcare",
+    authors: "Dr. James Wilson, Prof. Maria Garcia",
+    college: "Notre Dame College",
+    year: "2024",
+    category: "Healthcare",
+    abstract:
+      "Exploring the potential of quantum computing in medical diagnosis and treatment optimization.",
+    link: "https://example.com/research4",
+    downloads: 750,
+  },
+];
+
+// Reviews data
+const reviews = [
+  {
+    id: 1,
+    name: "Alex Thompson",
+    college: "Harvard University",
+    rating: 5,
+    comment:
+      "Exceptional academic environment with world-class faculty. The research opportunities are unparalleled.",
+    year: "Class of 2023",
+    avatar: "https://placeholder.com/100x100?text=AT",
+  },
+  {
+    id: 2,
+    name: "Priya Sharma",
+    college: "Stanford University",
+    rating: 5,
+    comment:
+      "Amazing campus culture and innovative programs. The tech ecosystem here is incredible.",
+    year: "Class of 2024",
+    avatar: "https://placeholder.com/100x100?text=PS",
+  },
+  {
+    id: 3,
+    name: "Mohammed Hassan",
+    college: "Dhaka College",
+    rating: 4,
+    comment:
+      "Great local institution with strong community ties. Excellent value for education.",
+    year: "Class of 2022",
+    avatar: "https://placeholder.com/100x100?text=MH",
+  },
+  {
+    id: 4,
+    name: "Emma Johnson",
+    college: "Oxford University",
+    rating: 5,
+    comment:
+      "Rich history and tradition combined with cutting-edge research. Truly transformative experience.",
+    year: "Class of 2023",
+    avatar: "https://placeholder.com/100x100?text=EJ",
+  },
+];
+
+// Gallery images
+const galleryImages = [
+  "https://placeholder.com/400x300?text=Graduation+Ceremony+2024",
+  "https://placeholder.com/300x400?text=Campus+Life",
+  "https://placeholder.com/500x300?text=Research+Lab",
+  "https://placeholder.com/300x300?text=Sports+Day",
+  "https://placeholder.com/400x400?text=Cultural+Festival",
+  "https://placeholder.com/350x250?text=Library+Study",
+  "https://placeholder.com/450x350?text=Science+Fair",
+  "https://placeholder.com/300x350?text=Art+Exhibition",
+];
+
+export default function HomePage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<typeof colleges>([]);
+  const [showResults, setShowResults] = useState(false);
+  const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      const results = colleges.filter((college) =>
+        college.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setSearchResults(results);
+      setShowResults(true);
+    }
+  };
+
+  const nextReview = () => {
+    setCurrentReviewIndex((prev) => (prev + 1) % reviews.length);
+  };
+
+  const prevReview = () => {
+    setCurrentReviewIndex(
+      (prev) => (prev - 1 + reviews.length) % reviews.length
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-bg-white font-inter">
-      {/* Hero Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-text-black mb-6">
-            Find Your Future,{" "}
-            <span className="text-bg-violet">Path to Success</span>
-          </h1>
-          <p className="text-xl text-text-black mb-12 max-w-3xl mx-auto">
-            Discover your ideal college journey with personalized
-            recommendations and comprehensive booking services.
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-[#fbfbfc] to-[#f7f7f7]">
+      {/* Hero Search Section */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative py-20 px-4 overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] opacity-10"></div>
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <Badge className="mb-6 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] text-white border-0 px-6 py-2 text-sm font-medium">
+              🎓 Discover Your Dream College
+            </Badge>
+          </motion.div>
 
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto flex gap-4">
-            <div className="flex-1">
-              <Input
-                type="text"
-                placeholder="Search for a college name..."
-                className="h-14 text-lg bg-fill-white border-border-gray rounded-lg"
-              />
-            </div>
-            <Button className="h-14 px-8 bg-bg-violet hover:bg-bg-pink text-text-white rounded-lg">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] bg-clip-text text-transparent leading-tight"
+          >
+            Find Your Perfect College
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="text-xl text-[#72768b] mb-8 max-w-2xl mx-auto leading-relaxed"
+          >
+            Explore top colleges worldwide, discover research opportunities, and
+            find your academic home with our comprehensive college search
+            platform.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-6"
+          >
+            <Input
+              type="text"
+              placeholder="Search for colleges..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="flex-1 h-12 px-6 text-lg border-2 border-[#e8e8e8] focus:border-[#b4a7f5] rounded-full"
+              onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+            />
+            <Button
+              onClick={handleSearch}
+              className="h-12 px-8 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white rounded-full font-medium"
+            >
               <Search className="w-5 h-5 mr-2" />
               Search
             </Button>
-          </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            className="flex flex-wrap justify-center gap-4 text-sm text-[#72768b]"
+          >
+            <span className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#68b978] rounded-full"></div>
+              98% Student Satisfaction
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#fbc54a] rounded-full"></div>
+              24/7 Support Available
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#ff6575] rounded-full"></div>
+              100+ Colleges
+            </span>
+          </motion.div>
+
+          {/* Search Results */}
+          {showResults && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+            >
+              {searchResults.map((college, index) => (
+                <motion.div
+                  key={college.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                >
+                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-[#e8e8e8] hover:border-[#b4a7f5]">
+                    <div className="relative h-48">
+                      <Image
+                        src={college.image || "/placeholder.svg"}
+                        alt={college.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-[#fbc54a] text-[#002058]">
+                          <Star className="w-3 h-3 mr-1" />
+                          {college.rating}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-bold text-[#002058] mb-2">
+                        {college.name}
+                      </h3>
+                      <p className="text-[#72768b] text-sm mb-4">
+                        {college.details.description.slice(0, 100)}...
+                      </p>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-center gap-2 text-[#68b978]">
+                          <Calendar className="w-4 h-4" />
+                          {college.admissionDates}
+                        </div>
+                        <div className="flex items-center gap-2 text-[#392c7d]">
+                          <BookOpen className="w-4 h-4" />
+                          {college.researchCount} Research Papers
+                        </div>
+                      </div>
+                      <Button className="w-full mt-4 bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white">
+                        View Details
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
-      </section>
+      </motion.section>
 
       {/* Featured Colleges Section */}
-      <section className="py-20 bg-bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-text-black text-center mb-12">
-            Featured Colleges
-          </h2>
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20 px-4"
+      >
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Badge className="mb-4 bg-[#e8dfff] text-[#392c7d] border-[#b4a7f5]">
+                Featured Institutions
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
+                Top Colleges & Universities
+              </h2>
+              <p className="text-xl text-[#72768b] max-w-2xl mx-auto">
+                Discover exceptional educational institutions known for their
+                academic excellence and innovative programs.
+              </p>
+            </motion.div>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* College Card 1 */}
-            <div className="bg-fill-white rounded-lg shadow-lg overflow-hidden border border-border-gray">
-              <Image
-                src="https://placehold.co/400x250/72768b/ffffff?text=Stanford+University"
-                alt="Stanford University"
-                width={400}
-                height={250}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-text-black mb-2">
-                  Stanford University
-                </h3>
-                <p className="text-text-black mb-2">
-                  <strong>Application Deadline:</strong> Aug 30, 2024
-                </p>
-                <p className="text-text-black mb-2">
-                  <strong>Open House:</strong> July 15, 2024
-                </p>
-                <p className="text-text-black mb-2">
-                  <strong>Research:</strong> Pioneering AI Research
-                </p>
-                <p className="text-text-black mb-4">
-                  <strong>Sports:</strong> Football, Basketball
-                </p>
-                <Button className="w-full bg-bg-pink hover:bg-bg-violet text-text-white rounded-lg">
-                  Details
-                </Button>
-              </div>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {colleges.slice(0, 3).map((college, index) => (
+              <motion.div
+                key={college.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="group"
+              >
+                <Card className="overflow-hidden h-full border-2 border-[#e8e8e8] hover:border-[#b4a7f5] transition-all duration-300 hover:shadow-2xl">
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={college.image || "/placeholder.svg"}
+                      alt={college.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-[#fbc54a] text-[#002058] font-semibold">
+                        <Star className="w-3 h-3 mr-1 fill-current" />
+                        {college.rating}
+                      </Badge>
+                    </div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        {college.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <CardContent className="p-6 space-y-4">
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div className="flex items-center gap-2 text-[#68b978]">
+                        <Calendar className="w-4 h-4" />
+                        <span className="font-medium">Admission</span>
+                      </div>
+                      <div className="text-[#72768b]">
+                        {college.admissionDates}
+                      </div>
+
+                      <div className="flex items-center gap-2 text-[#392c7d]">
+                        <BookOpen className="w-4 h-4" />
+                        <span className="font-medium">Research</span>
+                      </div>
+                      <div className="text-[#72768b]">
+                        {college.researchCount} Papers
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-[#002058] mb-2">
+                          Upcoming Events
+                        </h4>
+                        <div className="space-y-1">
+                          {college.events.slice(0, 2).map((event, idx) => (
+                            <div
+                              key={idx}
+                              className="text-sm text-[#72768b] flex items-start gap-2"
+                            >
+                              <div className="w-1.5 h-1.5 bg-[#ff6575] rounded-full mt-2 flex-shrink-0"></div>
+                              {event}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-[#002058] mb-2">
+                          Sports
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {college.sports.map((sport, idx) => (
+                            <Badge
+                              key={idx}
+                              variant="outline"
+                              className="text-xs border-[#b4a7f5] text-[#392c7d]"
+                            >
+                              <Trophy className="w-3 h-3 mr-1" />
+                              {sport}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white font-medium">
+                      View Details
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Image Gallery Section */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20 px-4 bg-gradient-to-r from-[#fbfbfc] to-[#f7f7f7]"
+      >
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Badge className="mb-4 bg-[#e9f6f2] text-[#68b978] border-[#68b978]">
+                Campus Life
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
+                College Memories Gallery
+              </h2>
+              <p className="text-xl text-[#72768b] max-w-2xl mx-auto">
+                Explore vibrant campus life through our collection of graduation
+                ceremonies, events, and student activities.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Marquee Gallery */}
+          <div className="overflow-hidden mb-8">
+            <motion.div
+              animate={{ x: [-1000, 0] }}
+              transition={{
+                duration: 20,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "linear",
+              }}
+              className="flex gap-6"
+            >
+              {[...galleryImages, ...galleryImages].map((image, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05 }}
+                  className="flex-shrink-0 w-80 h-60 rounded-2xl overflow-hidden shadow-lg"
+                >
+                  <Image
+                    src={image || "/placeholder.svg"}
+                    alt={`Gallery image ${index + 1}`}
+                    width={320}
+                    height={240}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Bento Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 h-96"
+          >
+            {galleryImages.slice(0, 8).map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, zIndex: 10 }}
+                className={`
+                  relative rounded-2xl overflow-hidden shadow-lg cursor-pointer
+                  ${index === 0 ? "col-span-2 row-span-2" : ""}
+                  ${index === 2 ? "col-span-2" : ""}
+                  ${index === 4 ? "row-span-2" : ""}
+                `}
+              >
+                <Image
+                  src={image || "/placeholder.svg"}
+                  alt={`Gallery ${index + 1}`}
+                  fill
+                  className="object-cover hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Research Papers Section */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20 px-4"
+      >
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Badge className="mb-4 bg-[#eceffe] text-[#392c7d] border-[#b4a7f5]">
+                Academic Research
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
+                Latest Research Papers
+              </h2>
+              <p className="text-xl text-[#72768b] max-w-2xl mx-auto">
+                Discover groundbreaking research from leading institutions and
+                contribute to the advancement of knowledge.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {researchPapers.map((paper, index) => (
+              <motion.div
+                key={paper.id}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+              >
+                <Card className="h-full border-2 border-[#e8e8e8] hover:border-[#b4a7f5] transition-all duration-300 hover:shadow-xl">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <Badge className="mb-3 bg-[#e8dfff] text-[#392c7d]">
+                          {paper.category}
+                        </Badge>
+                        <CardTitle className="text-xl font-bold text-[#002058] leading-tight mb-2">
+                          {paper.title}
+                        </CardTitle>
+                        <p className="text-sm text-[#72768b] mb-2">
+                          {paper.authors}
+                        </p>
+                        <p className="text-sm font-medium text-[#68b978]">
+                          {paper.college} • {paper.year}
+                        </p>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-[#b4a7f5] text-[#392c7d] hover:bg-[#b4a7f5] hover:text-white bg-transparent"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <p className="text-[#72768b] mb-4 leading-relaxed">
+                      {paper.abstract}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-sm text-[#72768b]">
+                        <span className="flex items-center gap-1">
+                          <BookOpen className="w-4 h-4" />
+                          {paper.downloads} downloads
+                        </span>
+                      </div>
+                      <Button
+                        size="sm"
+                        className="bg-gradient-to-r from-[#b4a7f5] to-[#f6a7f5] hover:from-[#a396f0] hover:to-[#f596f0] text-white"
+                      >
+                        Read Paper
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Reviews Section */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-20 px-4 bg-gradient-to-br from-[#fbfbfc] to-[#f7f7f7]"
+      >
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Badge className="mb-4 bg-[#fef8b8] text-[#002058] border-[#fbc54a]">
+                Student Testimonials
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#002058] mb-4">
+                What Students Say
+              </h2>
+              <p className="text-xl text-[#72768b] max-w-2xl mx-auto">
+                Real experiences from students who have found their perfect
+                college match through our platform.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto">
+            <motion.div
+              key={currentReviewIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+              className="text-center"
+            >
+              <Card className="border-2 border-[#e8e8e8] shadow-xl bg-white/80 backdrop-blur-sm">
+                <CardContent className="p-8 md:p-12">
+                  <div className="flex justify-center mb-6">
+                    <Image
+                      src={
+                        reviews[currentReviewIndex].avatar || "/placeholder.svg"
+                      }
+                      alt={reviews[currentReviewIndex].name}
+                      width={80}
+                      height={80}
+                      className="rounded-full border-4 border-[#b4a7f5]"
+                    />
+                  </div>
+
+                  <div className="flex justify-center mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          i < reviews[currentReviewIndex].rating
+                            ? "text-[#fbc54a] fill-current"
+                            : "text-[#e8e8e8]"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <blockquote className="text-xl md:text-2xl text-[#002058] font-medium mb-6 leading-relaxed">
+                    &quot;{reviews[currentReviewIndex].comment}&quot;
+                  </blockquote>
+
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-bold text-[#002058]">
+                      {reviews[currentReviewIndex].name}
+                    </h4>
+                    <p className="text-[#72768b]">
+                      {reviews[currentReviewIndex].year}
+                    </p>
+                    <p className="text-[#68b978] font-medium">
+                      {reviews[currentReviewIndex].college}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-center gap-4 mt-8">
+              <Button
+                onClick={prevReview}
+                variant="outline"
+                size="sm"
+                className="border-[#b4a7f5] text-[#392c7d] hover:bg-[#b4a7f5] hover:text-white bg-transparent"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              <Button
+                onClick={nextReview}
+                variant="outline"
+                size="sm"
+                className="border-[#b4a7f5] text-[#392c7d] hover:bg-[#b4a7f5] hover:text-white bg-transparent"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
             </div>
 
-            {/* College Card 2 */}
-            <div className="bg-fill-white rounded-lg shadow-lg overflow-hidden border border-border-gray">
-              <Image
-                src="https://placehold.co/400x250/72768b/ffffff?text=MIT"
-                alt="MIT"
-                width={400}
-                height={250}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-text-black mb-2">
-                  Massachusetts Institute of Technology
-                </h3>
-                <p className="text-text-black mb-2">
-                  <strong>Application Deadline:</strong> Sep 15, 2024
-                </p>
-                <p className="text-text-black mb-2">
-                  <strong>Open House:</strong> Aug 20, 2024
-                </p>
-                <p className="text-text-black mb-2">
-                  <strong>Research:</strong> Quantum Computing Breakthroughs
-                </p>
-                <p className="text-text-black mb-4">
-                  <strong>Sports:</strong> Rowing, Soccer
-                </p>
-                <Button className="w-full bg-bg-pink hover:bg-bg-violet text-text-white rounded-lg">
-                  Details
-                </Button>
-              </div>
-            </div>
-
-            {/* College Card 3 */}
-            <div className="bg-fill-white rounded-lg shadow-lg overflow-hidden border border-border-gray">
-              <Image
-                src="https://placehold.co/400x250/72768b/ffffff?text=Harvard+University"
-                alt="Harvard University"
-                width={400}
-                height={250}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-text-black mb-2">
-                  Harvard University
-                </h3>
-                <p className="text-text-black mb-2">
-                  <strong>Application Deadline:</strong> Oct 1, 2024
-                </p>
-                <p className="text-text-black mb-2">
-                  <strong>Open House:</strong> Sep 10, 2024
-                </p>
-                <p className="text-text-black mb-2">
-                  <strong>Research:</strong> Medical Innovation Hub
-                </p>
-                <p className="text-text-black mb-4">
-                  <strong>Sports:</strong> Crew, Tennis
-                </p>
-                <Button className="w-full bg-bg-pink hover:bg-bg-violet text-text-white rounded-lg">
-                  Details
-                </Button>
-              </div>
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-6">
+              {reviews.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentReviewIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentReviewIndex
+                      ? "bg-[#b4a7f5] scale-125"
+                      : "bg-[#e8e8e8] hover:bg-[#b4a7f5]/50"
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </div>
-      </section>
-
-      {/* College Image Gallery Section */}
-      <CollegeImageGallery />
-
-      {/* Recommended Research Papers Section */}
-      <section className="py-20 bg-bg-lightest">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-text-black text-center mb-12">
-            Groundbreaking Research
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-fill-white p-6 rounded-lg border border-border-gray">
-              <h3 className="text-xl font-bold text-text-black mb-3">
-                Artificial Intelligence in Healthcare: Revolutionary Diagnostic
-                Tools
-              </h3>
-              <p className="text-text-black mb-4">
-                Exploring how machine learning algorithms are transforming
-                medical diagnosis and patient care through predictive analytics
-                and automated screening processes.
-              </p>
-              <a
-                href="#"
-                className="text-bg-violet hover:text-bg-pink transition-colors font-medium"
-              >
-                Read More →
-              </a>
-            </div>
-
-            <div className="bg-fill-white p-6 rounded-lg border border-border-gray">
-              <h3 className="text-xl font-bold text-text-black mb-3">
-                Sustainable Energy Solutions: Next-Generation Solar Technology
-              </h3>
-              <p className="text-text-black mb-4">
-                Breakthrough research in photovoltaic efficiency and energy
-                storage systems that could revolutionize renewable energy
-                adoption worldwide.
-              </p>
-              <a
-                href="#"
-                className="text-bg-violet hover:text-bg-pink transition-colors font-medium"
-              >
-                Read More →
-              </a>
-            </div>
-
-            <div className="bg-fill-white p-6 rounded-lg border border-border-gray">
-              <h3 className="text-xl font-bold text-text-black mb-3">
-                Quantum Computing Applications in Cryptography
-              </h3>
-              <p className="text-text-black mb-4">
-                Investigating the implications of quantum computing on current
-                encryption methods and developing quantum-resistant security
-                protocols.
-              </p>
-              <a
-                href="#"
-                className="text-bg-violet hover:text-bg-pink transition-colors font-medium"
-              >
-                Read More →
-              </a>
-            </div>
-
-            <div className="bg-fill-white p-6 rounded-lg border border-border-gray">
-              <h3 className="text-xl font-bold text-text-black mb-3">
-                Climate Change Mitigation Through Urban Planning
-              </h3>
-              <p className="text-text-black mb-4">
-                Comprehensive study on how smart city design and green
-                infrastructure can significantly reduce urban carbon footprints
-                and improve quality of life.
-              </p>
-              <a
-                href="#"
-                className="text-bg-violet hover:text-bg-pink transition-colors font-medium"
-              >
-                Read More →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Student Reviews Section */}
-      <section className="py-20 bg-bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-text-black text-center mb-12">
-            What Our Students Say
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Review 1 */}
-            <div className="bg-fill-white p-6 rounded-lg border border-border-gray">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                </div>
-              </div>
-              <p className="text-text-black mb-4">
-                College Path made my application process so much easier. The
-                platform is intuitive and the support team was incredibly
-                helpful throughout my journey.
-              </p>
-              <div>
-                <p className="font-bold text-text-black">Sarah Johnson</p>
-                <p className="text-text-black">Stanford University</p>
-              </div>
-            </div>
-
-            {/* Review 2 */}
-            <div className="bg-fill-white p-6 rounded-lg border border-border-gray">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                </div>
-              </div>
-              <p className="text-text-black mb-4">
-                I found my dream college through College Path. The detailed
-                information and booking system saved me countless hours of
-                research and planning.
-              </p>
-              <div>
-                <p className="font-bold text-text-black">Michael Chen</p>
-                <p className="text-text-black">MIT</p>
-              </div>
-            </div>
-
-            {/* Review 3 */}
-            <div className="bg-fill-white p-6 rounded-lg border border-border-gray">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                </div>
-              </div>
-              <p className="text-text-black mb-4">
-                The comprehensive college profiles and real student reviews
-                helped me make an informed decision. Highly recommend College
-                Path to all prospective students!
-              </p>
-              <div>
-                <p className="font-bold text-text-black">Emily Rodriguez</p>
-                <p className="text-text-black">Harvard University</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
