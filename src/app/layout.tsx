@@ -4,6 +4,7 @@ import { siteMetadata } from "@/constants/metadata";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,6 +38,7 @@ export default function RootLayout({
             easing="ease"
             speed={300}
           />
+          <Toaster position="bottom-right" />
 
           <Navbar />
           {children}

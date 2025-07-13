@@ -3,7 +3,6 @@
 import { collections, dbConnect } from "@/lib/dbConnect";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function addAdmission(formData: FormData) {
   const current = await currentUser();
@@ -31,7 +30,7 @@ export async function addAdmission(formData: FormData) {
   await profileCollection.updateOne(
     { userId: current.id },
     {
-      $setOnInsert: {
+      $set: {
         name: admissionData.name,
         email: admissionData.email,
         phone: admissionData.phone,
@@ -39,13 +38,15 @@ export async function addAdmission(formData: FormData) {
         university: admissionData.subject,
         dob: admissionData.dob,
         image: admissionData.image,
+        updatedAt: new Date(),
+      },
+      $setOnInsert: {
         createdAt: new Date(),
       },
-      $set: { updatedAt: new Date() },
     },
     { upsert: true }
   );
 
   revalidatePath("/my-college");
-  redirect("/my-college");
+  return { success: true };
 }
