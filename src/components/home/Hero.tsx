@@ -65,7 +65,7 @@ export default function Hero() {
             />
             <Button
               onClick={handleSearch}
-              className="h-11 px-8 bg-gradient-to-r from-bg-violet to-bg-pink hover:from-bg-violet/90 hover:to-bg-pink/90 text-white rounded-full font-medium"
+              className="h-11 px-8 bg-gradient-to-r from-bg-violet to-bg-pink hover:from-bg-violet/90 hover:to-bg-pink/90 text-white cursor-pointer rounded-full font-medium"
             >
               <Search className="w-5 h-5 mr-2" />
               Search
