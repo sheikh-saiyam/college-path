@@ -16,14 +16,13 @@ interface AdmissionData {
   email: string;
   phone: string;
   address: string;
-  dob: string; // ISO string expected
+  dob: string;
   image: string;
-  createdAt: number; // timestamp number
+  createdAt: number;
   university: string;
   updatedAt: string;
 }
 
-// ইউজারের একাধিক admission নিয়ে আসবে
 async function getAdmissionData(userId: string): Promise<AdmissionData[]> {
   const admissionCollection = await dbConnect(collections.admissions);
   const result = await admissionCollection.find({ userId }).toArray();
@@ -37,9 +36,7 @@ export default async function MyCollegePage() {
   const userId = user.id;
   const admissions = await getAdmissionData(userId);
 
-  if (!admissions || admissions.length === 0) {
-    return <EmptyState />;
-  }
+  if (!admissions || admissions.length === 0) return <EmptyState />;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -115,7 +112,12 @@ export default async function MyCollegePage() {
               </div>
 
               <div className="mt-8">
-                <ReviewModal admissionId={admission._id} />
+                <ReviewModal
+                  admissionId={admission._id}
+                  userName={admission.name}
+                  userCollege={admission.collegeName}
+                  userAvatar={admission.image}
+                />
               </div>
             </CardContent>
           </Card>
