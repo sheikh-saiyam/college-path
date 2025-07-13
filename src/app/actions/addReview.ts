@@ -1,6 +1,7 @@
 "use server";
 
 import { collections, dbConnect } from "@/lib/dbConnect";
+import { revalidatePath } from "next/cache";
 
 interface ReviewInput {
   admissionId: string;
@@ -36,4 +37,6 @@ export async function addReview({
   };
 
   await reviewCollection.insertOne(newReview);
+
+  revalidatePath("/");
 }

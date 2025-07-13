@@ -8,70 +8,17 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const reviews = [
-  {
-    id: 1,
-    name: "Alex Thompson",
-    college: "Harvard University",
-    rating: 5,
-    comment:
-      "Harvard gave me top-class education and great research opportunities. Campus life was truly remarkable.",
-    year: "Class of 2023",
-    avatar: "https://randomuser.me/api/portraits/men/45.jpg",
-  },
-  {
-    id: 2,
-    name: "Priya Sharma",
-    college: "Stanford University",
-    rating: 5,
-    comment:
-      "Stanford's innovative learning style and modern labs helped me grow both academically and personally.",
-    year: "Class of 2024",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-  },
-  {
-    id: 3,
-    name: "Mohammed Hassan",
-    college: "Dhaka College",
-    rating: 4,
-    comment:
-      "Dhaka College offers strong academic support and a close-knit community that helps students succeed.",
-    year: "Class of 2022",
-    avatar: "https://randomuser.me/api/portraits/men/33.jpg",
-  },
-  {
-    id: 4,
-    name: "Emma Johnson",
-    college: "Oxford University",
-    rating: 5,
-    comment:
-      "Oxford's historic campus and rigorous academics made it the most fulfilling experience of my student life.",
-    year: "Class of 2023",
-    avatar: "https://randomuser.me/api/portraits/women/12.jpg",
-  },
-  {
-    id: 5,
-    name: "Lucas Müller",
-    college: "Stanford University",
-    rating: 5,
-    comment:
-      "Stanford empowered me to explore ideas freely, collaborate with experts, and build a global mindset.",
-    year: "Class of 2023",
-    avatar: "https://randomuser.me/api/portraits/men/59.jpg",
-  },
-  {
-    id: 6,
-    name: "Amina Rahman",
-    college: "Oxford University",
-    rating: 5,
-    comment:
-      "Oxford helped sharpen my critical thinking and gave me access to unmatched academic resources and support.",
-    year: "Class of 2024",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-  },
-];
+export interface Review {
+  admissionId: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+  name: string;
+  college: string;
+  avatar: string;
+}
 
-export default function Reviews() {
+export default function Reviews({ reviews }: { reviews: Review[] }) {
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
 
   const nextReview = () => {
@@ -173,9 +120,6 @@ export default function Reviews() {
                   <h4 className="text-lg font-bold text-[#002058]">
                     {reviews[currentReviewIndex].name}
                   </h4>
-                  <p className="text-[#72768b]">
-                    {reviews[currentReviewIndex].year}
-                  </p>
                   <p className="text-[#68b978] font-medium">
                     {reviews[currentReviewIndex].college}
                   </p>
