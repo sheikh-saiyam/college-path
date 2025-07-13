@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,9 +8,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { addReview } from "../actions/addReview";
 import { Textarea } from "@/components/ui/textarea";
 import { StarIcon } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface ReviewModalProps {
@@ -64,7 +64,7 @@ export default function ReviewModal({
       if (onReviewAdded) onReviewAdded();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to submit review");
+      toast.error("Failed to submit review!");
     } finally {
       setIsSubmitting(false);
     }
@@ -73,7 +73,7 @@ export default function ReviewModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>Add Review</Button>
+        <Button className="cursor-pointer bg-gradient-to-r from-bg-violet to-bg-pink hover:opacity-80 hover:scale-105 duration-300 text-white font-medium">Add Review</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

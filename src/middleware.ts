@@ -4,7 +4,7 @@ const isPrivateRoute = createRouteMatcher([
   "/my-college",
   "/profile",
   "/admission",
-  "/colleges(.*)",
+  // "/colleges(.*)",
 ]);
 const isPrivateApiRoute = createRouteMatcher(["/api/my-college"]);
 
