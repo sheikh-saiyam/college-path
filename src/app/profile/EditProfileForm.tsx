@@ -30,6 +30,8 @@ export default function EditProfileForm({ profile, userId, email }: Props) {
     dob: profile?.dob || "",
   });
 
+  const [isSaving, setIsSaving] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -37,6 +39,7 @@ export default function EditProfileForm({ profile, userId, email }: Props) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setIsSaving(true);
     try {
       await updateUserProfile({
         ...formData,
@@ -46,6 +49,8 @@ export default function EditProfileForm({ profile, userId, email }: Props) {
     } catch (err) {
       console.log(err);
       toast.error("Failed to update profile");
+    } finally {
+      setIsSaving(false);
     }
   }
 
@@ -91,8 +96,8 @@ export default function EditProfileForm({ profile, userId, email }: Props) {
           onChange={handleChange}
         />
       </div>
-      <Button type="submit" className="cursor-pointer">
-        Save
+      <Button type="submit" disabled={isSaving}>
+        {isSaving ? "Saving..." : "Save"}
       </Button>
     </form>
   );
