@@ -1,10 +1,15 @@
-"use client";
-
-import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { addAdmission } from "../actions/addAdmission";
 import { ClerkUser, College } from "./page";
 
@@ -14,19 +19,26 @@ interface AdmissionFormProps {
 }
 
 export default function AdmissionForm({ college, user }: AdmissionFormProps) {
-  const [open, setOpen] = useState(false);
-
   return (
-    <div>
-      <Button variant="outline" className="mb-4" onClick={() => setOpen(!open)}>
-        {open ? "Hide Form" : "Get Admission"}
-      </Button>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="mx-auto w-3/5 bg-gradient-to-r from-bg-violet to-bg-pink hover:opacity-80 hover:scale-105 duration-300 cursor-pointer text-white font-medium">
+          Get Admission
+        </Button>
+      </DialogTrigger>
 
-      {open && (
+      <DialogContent className="sm:max-w-lg">
+        <DialogHeader className="mt-3 mb-0 pb-0">
+          <DialogTitle>
+            Admission Form for <span className="font-bold">{college.name}</span>
+          </DialogTitle>
+          <DialogClose className="absolute right-4 top-4 hidden" />
+        </DialogHeader>
+
         <form
           action={addAdmission}
-          className="space-y-4 px-1 mt-2"
           method="post"
+          className="space-y-4 -mt-2 pt-3 border-t"
         >
           {/* Hidden inputs */}
           <input type="hidden" name="collegeId" value={college.id} />
@@ -34,14 +46,32 @@ export default function AdmissionForm({ college, user }: AdmissionFormProps) {
           <input type="hidden" name="collegeImage" value={college.image} />
 
           {/* Name */}
-          <div className="space-y-2">
-            <Label htmlFor="name">Candidate Name</Label>
-            <Input
-              id="name"
-              name="name"
-              defaultValue={user.fullName ?? ""}
-              required
-            />
+          <div className="flex items-center gap-4">
+            <div className="space-y-2 flex-1">
+              <Label htmlFor="name">Candidate Name</Label>
+              <Input
+                id="name"
+                name="name"
+                defaultValue={user.fullName ?? ""}
+                required
+              />
+            </div>
+            {/* Profile Image (readonly, hidden input) */}
+            <div className="space-y-2">
+              <Label>Image</Label>
+              <div className="flex items-center justify-center gap-3">
+                <Avatar>
+                  <AvatarImage src={user.imageUrl ?? undefined} />
+                  <AvatarFallback>{user.fullName?.[0]}</AvatarFallback>
+                </Avatar>
+                <Input
+                  type="hidden"
+                  name="image"
+                  value={user.imageUrl ?? ""}
+                  readOnly
+                />
+              </div>
+            </div>
           </div>
 
           {/* Subject / University */}
@@ -80,28 +110,13 @@ export default function AdmissionForm({ college, user }: AdmissionFormProps) {
             <Input id="dob" name="dob" type="date" required />
           </div>
 
-          {/* Profile Image (readonly, hidden input) */}
-          <div className="space-y-2">
-            <Label>Profile Image</Label>
-            <div className="flex items-center gap-3">
-              <Avatar>
-                <AvatarImage src={user.imageUrl ?? undefined} />
-                <AvatarFallback>{user.fullName?.[0]}</AvatarFallback>
-              </Avatar>
-              <Input
-                type="hidden"
-                name="image"
-                value={user.imageUrl ?? ""}
-                readOnly
-              />
-            </div>
+          <div className="w-[80%] mx-auto">
+            <Button type="submit" className="w-full cursor-pointer">
+              Submit Admission
+            </Button>
           </div>
-
-          <Button type="submit" className="w-full">
-            Submit Admission
-          </Button>
         </form>
-      )}
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

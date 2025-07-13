@@ -100,10 +100,13 @@ export default async function AdmissionPage() {
       {/* Colleges List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {colleges.map((college) => (
-          <Card key={college.id} className="py-4 shadow-md border rounded-xl">
+          <Card
+            key={college.id}
+            className="pt-3 pb-5 shadow-md border rounded-xl"
+          >
             <CardContent className="px-4 space-y-4">
               <div>
-                <h3 className="text-2xl font-bold text-text-purple mb-0.5">
+                <h3 className="text-xl font-bold text-text-purple mb-0.5">
                   {college.name}
                 </h3>
                 <div className="flex items-center gap-2">
