@@ -1,4 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { currentUser } from "@clerk/nextjs/server";
 import EditProfileForm from "./EditProfileForm";
 import { dbConnect } from "@/lib/dbConnect";
@@ -30,10 +36,13 @@ export default async function CollegeProfilePage() {
     : null;
 
   return (
-    <div className="max-w-2xl mx-auto py-12">
-      <Card>
-        <CardHeader>
-          <CardTitle>User Profile</CardTitle>
+    <div className="max-w-2xl mx-auto">
+      <Card className="shadow-xl">
+        <CardHeader className="border-b space-y-0.5 gap-0.5">
+          <CardTitle className="text-xl">College Profile</CardTitle>
+          <CardDescription className="text-sm text-muted-foreground">
+            You can view and edit your college information here.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <EditProfileForm

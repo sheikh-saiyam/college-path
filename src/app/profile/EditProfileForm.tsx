@@ -51,26 +51,26 @@ export default function EditProfileForm({ profile, userId, email }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+      <div className="space-y-2">
         <Label>Email (non-editable)</Label>
         <Input value={email} disabled />
         <p className="text-xs text-muted-foreground mt-1">
           Email can only be updated from Clerk profile settings.
         </p>
       </div>
-      <div>
+      <div className="space-y-2">
         <Label htmlFor="name">Full Name</Label>
         <Input name="name" value={formData.name} onChange={handleChange} />
       </div>
-      <div>
-        <Label htmlFor="university">University</Label>
+      <div className="space-y-2">
+        <Label htmlFor="university">University subject</Label>
         <Input
           name="university"
           value={formData.university}
           onChange={handleChange}
         />
       </div>
-      <div>
+      <div className="space-y-2">
         <Label htmlFor="address">Address</Label>
         <Input
           name="address"
@@ -78,11 +78,11 @@ export default function EditProfileForm({ profile, userId, email }: Props) {
           onChange={handleChange}
         />
       </div>
-      <div>
+      <div className="space-y-2">
         <Label htmlFor="phone">Phone</Label>
         <Input name="phone" value={formData.phone} onChange={handleChange} />
       </div>
-      <div>
+      <div className="space-y-2">
         <Label htmlFor="dob">Date of Birth</Label>
         <Input
           name="dob"
@@ -91,7 +91,9 @@ export default function EditProfileForm({ profile, userId, email }: Props) {
           onChange={handleChange}
         />
       </div>
-      <Button type="submit">Save</Button>
+      <Button type="submit" className="cursor-pointer">
+        Save
+      </Button>
     </form>
   );
 }
