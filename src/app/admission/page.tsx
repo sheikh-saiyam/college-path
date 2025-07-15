@@ -11,6 +11,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { colleges } from "@/lib/colleges";
 import AdmissionForm from "./AdmissionForm";
+import { Metadata } from "next";
 
 export interface College {
   id: number;
@@ -28,6 +29,20 @@ export interface ClerkUser {
   }[];
   imageUrl: string | null;
 }
+
+export const metadata: Metadata = {
+  title: "College Path | Admission",
+  description:
+    "Secure your seat at your dream college through our streamlined admission process. Easily fill out the form and get started today.",
+  keywords: [
+    "college admission",
+    "book college",
+    "admission form",
+    "College Path",
+    "online college booking",
+    "admission process",
+  ],
+};
 
 export default async function AdmissionPage() {
   const user = await currentUser();
