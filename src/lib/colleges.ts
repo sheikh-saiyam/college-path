@@ -189,4 +189,89 @@ export const colleges = [
         "Rowing, Cricket, Rugby, and more with historic facilities.",
     },
   },
+  {
+    id: 7,
+    name: "Massachusetts Institute of Technology (MIT)",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/1/17/MIT_Building_10.jpg",
+    rating: 4.9,
+    admissionDates: "August 1 - January 1, 2026",
+    researchCount: 550,
+    events: ["Tech Fair - October 2025", "Startup Showcase - December 2025"],
+    researchHistory: [
+      {
+        title: "Artificial Intelligence & Robotics",
+        link: "https://example.com/research-mit",
+      },
+    ],
+    sports: ["Basketball", "Sailing", "Track and Field"],
+    details: {
+      description:
+        "MIT is a world-renowned institution known for its cutting-edge research and innovation in science and technology.",
+      admissionProcess:
+        "Apply directly through MIT's application portal with essays and recommendation letters.",
+      eventsDetails:
+        "Hosts tech fairs, hackathons, and startup showcases throughout the year.",
+      researchWorks: "Focused on AI, robotics, physics, and space exploration.",
+      sportsCategories:
+        "Basketball, Sailing, Track and Field, and other intramural sports.",
+    },
+  },
+  {
+    id: 8,
+    name: "University of Cambridge",
+    image:
+      "https://www.universityliving.com/blog/wp-content/uploads/2023/07/Banner-Image-The-University-of-Cambridge.webp",
+    rating: 4.8,
+    admissionDates: "September 1 - October 15, 2025",
+    researchCount: 390,
+    events: ["Science Festival - March 2025", "May Ball - May 2025"],
+    researchHistory: [
+      {
+        title: "Quantum Computing",
+        link: "https://example.com/research-cambridge",
+      },
+    ],
+    sports: ["Rowing", "Football", "Tennis"],
+    details: {
+      description:
+        "The University of Cambridge is a globally respected institution with a long tradition of academic excellence.",
+      admissionProcess:
+        "UCAS application with admissions assessments and interviews.",
+      eventsDetails:
+        "Organizes science festivals, formal balls, and public lectures.",
+      researchWorks: "Excels in quantum computing, biology, and engineering.",
+      sportsCategories:
+        "Rowing, Football, Tennis, and various college sports leagues.",
+    },
+  },
+  {
+    id: 9,
+    name: "University of Northampton",
+    image:
+      "https://www.northampton.ac.uk/wp-content/uploads/2024/04/creative-hub-exterior.jpg",
+    rating: 4.2,
+    admissionDates: "June 1 - September 1, 2025",
+    researchCount: 120,
+    events: ["Entrepreneurship Week - April 2025", "Cultural Fest - July 2025"],
+    researchHistory: [
+      {
+        title: "Sustainable Business Practices",
+        link: "https://example.com/research-northampton",
+      },
+    ],
+    sports: ["Football", "Netball", "Basketball"],
+    details: {
+      description:
+        "The University of Northampton focuses on innovation, social impact, and employability.",
+      admissionProcess:
+        "Apply via UCAS or directly with academic transcripts and personal statement.",
+      eventsDetails:
+        "Known for cultural festivals, career fairs, and entrepreneurship programs.",
+      researchWorks:
+        "Research strengths include social enterprise and sustainability.",
+      sportsCategories:
+        "Football, Netball, Basketball, and other community sports.",
+    },
+  },
 ];
