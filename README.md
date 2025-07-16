@@ -1,5 +1,5 @@
 College Booking Web Application
-A web application built with Next.js, Node.js, Express, MongoDB, and Clerk authentication to facilitate booking college services and facilities with a user-friendly, responsive interface.
+A web application built with Next.js, Typescript, MongoDB, and Clerk authentication to facilitate booking college services and facilities with a user-friendly, responsive interface.
 Features
 
 Navigation: Includes Home, Colleges, Admission, and My College sections.
