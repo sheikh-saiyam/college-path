@@ -1,4 +1,4 @@
-![College Path Banner](https://your-image-link-here.com/banner.png)
+![College Path Banner](./public/project.png)
 
 # 🎓 College Path – Book Your Future
 
@@ -30,4 +30,4 @@ College Path is a user-friendly web application built to help students explore, 
 - 📱 Fully responsive across all devices
 - 🎨 Creative 404 page
 
---- 
+---
