@@ -17,7 +17,7 @@ Authentication:
 Registration/login via Clerk (email/password, Google, social media).
 Password reset functionality.
 College details and review submission restricted to logged-in users.
-Displays user’s profile name after login.
+Displays user’s profile naasdd me after login.
 
 Profile Route: Accessible by clicking the profile name, displays user details (Name, Email, University, Address) with an "Edit" button to update info, saved via a "Save" button.
 404 Route: Custom, creative 404 page for invalid routes.
@@ -44,4 +44,6 @@ Add Clerk and MongoDB configurations:NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-cle
 CLERK_SECRET_KEY=<your-clerk-secret-key>
 MONGODB_URI=<your-mongodb-uri>
 
-Run the development server:npm run dev
+Run the development server
+
+:npm run dev
