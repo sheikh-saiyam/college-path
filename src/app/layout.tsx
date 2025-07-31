@@ -1,8 +1,8 @@
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import { siteMetadata } from "@/constants/metadata";
+import { WrapperClerkProviders } from "@/providers/clerk-provider";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -25,26 +25,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <NextTopLoader
-            color="linear-gradient(to right, var(--bg-violet), var(--bg-pink))"
-            height={2.5}
-            crawlSpeed={200}
-            showSpinner={false}
-            easing="ease"
-            speed={300}
-          />
-          <Toaster position="bottom-right" />
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <NextTopLoader
+          color="linear-gradient(to right, var(--bg-violet), var(--bg-pink))"
+          height={2.5}
+          crawlSpeed={200}
+          showSpinner={false}
+          easing="ease"
+          speed={300}
+        />
+        <Toaster position="bottom-right" />
 
+        <WrapperClerkProviders>
           <Navbar />
           {children}
-          <Footer />
-        </body>
-      </html>
-    </ClerkProvider>
+          <Footer />{" "}
+        </WrapperClerkProviders>
+      </body>
+    </html>
   );
 }
