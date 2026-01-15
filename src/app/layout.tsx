@@ -28,6 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <NextTopLoader
           color="linear-gradient(to right, var(--bg-violet), var(--bg-pink))"
